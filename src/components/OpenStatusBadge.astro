@@ -49,11 +49,17 @@
     font-weight: 600;
   }
 
+  /* --open-status-accent lets an ancestor (e.g. Hero's dark desktop
+     background) override this to something with real contrast against
+     it — --sambal on --leaf is only ~1.5:1, nowhere near AA. */
   .open-status[data-open='true'] {
-    color: var(--sambal);
+    color: var(--open-status-accent, var(--sambal));
   }
 
   .open-status[data-open='false'] {
-    color: var(--ink);
+    /* Inherit the ambient text color rather than forcing --ink, since
+       this badge also renders on dark (--leaf) backgrounds where --ink
+       would be nearly invisible. */
+    color: inherit;
   }
 </style>
