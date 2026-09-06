@@ -3,6 +3,18 @@ import { restaurant } from '../data/restaurant';
 import { openingHours, DAY_LABEL_ID } from '../data/opening-hours';
 import ContactCta from './ContactCta.astro';
 
+const PLATFORM_LABEL: Record<string, string> = {
+  instagram: 'Instagram',
+  facebook: 'Facebook',
+  youtube: 'YouTube',
+  tripadvisor: 'Tripadvisor',
+  tiktok: 'TikTok',
+};
+
+// Only accounts verified as belonging to this restaurant appear here — see
+// docs/pepes-emin/research (workspace docs) for the verification criteria.
+const verifiedSocialLinks = restaurant.socialLinks.filter((link) => link.verified);
+
 const { address } = restaurant;
 const addressLines = [
   address.street,
@@ -39,6 +51,18 @@ const year = new Date().getFullYear();
       </p>
     )}
 
+    {
+      verifiedSocialLinks.length > 0 && (
+        <p class="footer__social">
+          {verifiedSocialLinks.map((link) => (
+            <a href={link.url} target="_blank" rel="noopener noreferrer me">
+              {PLATFORM_LABEL[link.platform] ?? link.platform}
+            </a>
+          ))}
+        </p>
+      )
+    }
+
     <p class="footer__notice">{restaurant.name} — website ini adalah prototype. &copy; {year}</p>
   </div>
 </footer>
@@ -69,5 +93,10 @@ const year = new Date().getFullYear();
 
   .footer__notice {
     margin-top: var(--sp-3);
+  }
+
+  .footer__social {
+    display: flex;
+    gap: var(--sp-3);
   }
 </style>

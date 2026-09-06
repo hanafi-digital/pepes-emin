@@ -61,6 +61,11 @@ if (restaurant.phone) {
   data.telephone = restaurant.phone;
 }
 
+const verifiedSocialLinks = restaurant.socialLinks.filter((link) => link.verified);
+if (verifiedSocialLinks.length > 0) {
+  data.sameAs = verifiedSocialLinks.map((link) => link.url);
+}
+
 // Never render aggregateRating/review here — that data would have to come
 // from ratings collected on this site itself, not copied from Google or any
 // third party. See docs/pepes-emin/pid.md (workspace docs) for why.
