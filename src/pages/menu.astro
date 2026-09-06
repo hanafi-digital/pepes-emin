@@ -33,7 +33,7 @@ const breadcrumbJsonLd = {
     is:inline
   />
 
-  <div class="p-4">
+  <div class="mx-auto max-w-4xl px-4 py-6">
     <h1 class="text-xl font-bold tracking-tight text-gray-900">Daftar harga lengkap</h1>
 
     {
@@ -55,7 +55,9 @@ const breadcrumbJsonLd = {
       categoriesWithItems.map((category) => (
         <div id={category.name.toLowerCase().replace(/\s+/g, '-')} class="mt-6">
           <h2 class="mb-3 text-base font-semibold text-gray-900">{category.name}</h2>
-          {category.items.map((item) => <MenuCard item={item} />)}
+          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {category.items.map((item) => <MenuCard item={item} />)}
+          </div>
         </div>
       ))
     }

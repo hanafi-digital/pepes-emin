@@ -12,8 +12,8 @@ const hasDirections = Boolean(restaurant.googleMapsDirectionsUrl);
 const location = `${restaurant.address.village}, ${restaurant.address.city}`;
 ---
 
-<section class="relative">
-  <div class="relative aspect-[4/3] w-full overflow-hidden">
+<section class="relative mx-auto max-w-4xl lg:grid lg:grid-cols-2 lg:items-stretch lg:gap-8 lg:px-4 lg:py-8">
+  <div class="relative aspect-[4/3] w-full overflow-hidden lg:aspect-auto lg:rounded-2xl">
     <Image
       src={heroPlaceholder}
       alt={`Placeholder foto ${restaurant.name} — menunggu foto asli dari pemilik`}
@@ -37,7 +37,7 @@ const location = `${restaurant.address.village}, ${restaurant.address.city}`;
     </div>
   </div>
 
-  <div class="flex flex-col gap-3 p-4">
+  <div class="flex flex-col gap-3 p-4 lg:justify-center lg:p-0">
     {restaurant.tagline && <p class="text-sm text-gray-500">{restaurant.tagline}</p>}
 
     <slot name="status" />

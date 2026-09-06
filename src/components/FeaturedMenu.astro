@@ -7,15 +7,15 @@ import { menu } from '../data/menu';
 const featuredItems = menu.flatMap((category) => category.items).filter((item) => item.isFeatured);
 ---
 
-<section id="menu" class="p-4">
+<section id="menu" class="mx-auto max-w-4xl px-4 py-6">
   <h2 class="mb-4 text-xl font-bold tracking-tight text-gray-900">Menu Favorit</h2>
 
-  <div>
+  <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
     {featuredItems.map((item) => <MenuCard item={item} />)}
   </div>
 
-  <p class="mb-3 text-sm text-gray-500">Harga dapat berubah.</p>
-  <Button href={withBase('/menu')} variant="secondary" class="w-full">
+  <p class="mt-4 mb-3 text-sm text-gray-500">Harga dapat berubah.</p>
+  <Button href={withBase('/menu')} variant="secondary" class="w-full sm:w-auto">
     Lihat menu lengkap
   </Button>
 </section>

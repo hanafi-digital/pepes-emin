@@ -12,50 +12,54 @@ const addressLines = [
 ].filter(Boolean);
 ---
 
-<section id="lokasi" class="flex flex-col gap-4 p-4">
-  <h2 class="text-xl font-bold tracking-tight text-gray-900">Lokasi &amp; Jam Buka</h2>
+<section id="lokasi" class="mx-auto max-w-4xl px-4 py-6 lg:grid lg:grid-cols-2 lg:gap-8">
+  <div class="flex flex-col gap-4">
+    <h2 class="text-xl font-bold tracking-tight text-gray-900">Lokasi &amp; Jam Buka</h2>
 
-  <OpenStatusBadge />
+    <OpenStatusBadge />
 
-  <address class="not-italic flex flex-col text-sm text-gray-500">
-    {addressLines.map((line) => <span>{line}</span>)}
-    {restaurant.landmark && <span>{restaurant.landmark}</span>}
-  </address>
+    <address class="not-italic flex flex-col text-sm text-gray-500">
+      {addressLines.map((line) => <span>{line}</span>)}
+      {restaurant.landmark && <span>{restaurant.landmark}</span>}
+    </address>
 
-  <table data-hours-table class="w-full max-w-sm border-collapse text-sm">
-    <caption class="sr-only">Jam buka RM Pepes Jambal H. Emin</caption>
-    <thead>
-      <tr>
-        <th scope="col" class="border-b border-gray-100 py-1 pr-2 text-left font-semibold text-gray-900">
-          Hari
-        </th>
-        <th scope="col" class="border-b border-gray-100 py-1 text-left font-semibold text-gray-900">
-          Jam
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {
-        openingHours.map((h) => (
-          <tr data-day={h.day}>
-            <th scope="row" class="border-b border-gray-100 py-1 pr-2 text-left font-normal text-gray-900">
-              {DAY_LABEL_ID[h.day]}
-            </th>
-            <td class="border-b border-gray-100 py-1 tabular-nums text-gray-500">
-              {h.closed || !h.opens || !h.closes ? 'Tutup' : `${h.opens}–${h.closes}`}
-            </td>
-          </tr>
-        ))
-      }
-    </tbody>
-  </table>
-
-  <div class="overflow-hidden rounded-xl border border-gray-100">
-    <slot name="map" />
+    <table data-hours-table class="w-full max-w-sm border-collapse text-sm">
+      <caption class="sr-only">Jam buka RM Pepes Jambal H. Emin</caption>
+      <thead>
+        <tr>
+          <th scope="col" class="border-b border-gray-100 py-1 pr-2 text-left font-semibold text-gray-900">
+            Hari
+          </th>
+          <th scope="col" class="border-b border-gray-100 py-1 text-left font-semibold text-gray-900">
+            Jam
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          openingHours.map((h) => (
+            <tr data-day={h.day}>
+              <th scope="row" class="border-b border-gray-100 py-1 pr-2 text-left font-normal text-gray-900">
+                {DAY_LABEL_ID[h.day]}
+              </th>
+              <td class="border-b border-gray-100 py-1 tabular-nums text-gray-500">
+                {h.closed || !h.opens || !h.closes ? 'Tutup' : `${h.opens}–${h.closes}`}
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
   </div>
 
-  <div>
-    <slot name="contact"><ContactCta variant="inline" /></slot>
+  <div class="mt-4 flex flex-col gap-4 lg:mt-0">
+    <div class="overflow-hidden rounded-xl border border-gray-100">
+      <slot name="map" />
+    </div>
+
+    <div>
+      <slot name="contact"><ContactCta variant="inline" /></slot>
+    </div>
   </div>
 </section>
 

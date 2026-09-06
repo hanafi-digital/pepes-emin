@@ -22,15 +22,12 @@ function isActive(href: string): boolean {
 }
 ---
 
-<header class="sticky top-0 z-50 border-b border-gray-100 bg-white/80 px-4 py-3 backdrop-blur-md">
-  <div class="flex items-center justify-between gap-3">
+<header class="sticky top-0 z-50 border-b border-gray-100 bg-white/80 backdrop-blur-md">
+  <div class="mx-auto flex max-w-4xl flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
     <a href={withBase('/')} class="text-lg font-bold tracking-tight text-gray-900">
       {restaurant.name}
     </a>
-    <nav
-      aria-label="Navigasi utama"
-      class="flex gap-4 overflow-x-auto [-webkit-overflow-scrolling:touch]"
-    >
+    <nav aria-label="Navigasi utama" class="flex flex-wrap gap-x-4 gap-y-1">
       {
         navItems.map((item) => (
           <a
