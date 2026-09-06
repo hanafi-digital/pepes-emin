@@ -1,0 +1,60 @@
+---
+import ReviewCard from './ReviewCard.astro';
+import { reviews } from '../data/reviews';
+import { restaurant } from '../data/restaurant';
+
+const hasMapsUrl = Boolean(restaurant.googleMapsUrl);
+---
+
+<section id="ulasan" class="section container reviews">
+  <h2>Kata pelanggan</h2>
+
+  {
+    reviews.length > 0 && (
+      <div class="reviews__list">
+        {reviews.map((review) => (
+          <ReviewCard review={review} />
+        ))}
+      </div>
+    )
+  }
+
+  <div id="google-reviews-embed" class="reviews__embed" />
+
+  {
+    hasMapsUrl && (
+      <a
+        class="reviews__cta"
+        href={restaurant.googleMapsUrl!}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Baca semua ulasan di Google Maps
+      </a>
+    )
+  }
+</section>
+
+<style>
+  .reviews {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+  }
+
+  .reviews__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+  }
+
+  .reviews__embed {
+    aspect-ratio: 16 / 9;
+    min-height: 200px;
+  }
+
+  .reviews__cta {
+    width: fit-content;
+    text-decoration: underline;
+  }
+</style>
