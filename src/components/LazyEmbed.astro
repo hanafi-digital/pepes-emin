@@ -2,21 +2,33 @@
 interface Props {
   src: string;
   title: string;
-  aspectRatio?: string;
+  aspectRatio?: string | null;
   minHeight?: string;
   label: string;
+  class?: string;
 }
 
-const { src, title, aspectRatio = '16/9', minHeight = '200px', label } = Astro.props;
+const {
+  src,
+  title,
+  aspectRatio = null,
+  minHeight = '320px',
+  label,
+  class: className = '',
+} = Astro.props;
+
+const style = aspectRatio
+  ? `aspect-ratio:${aspectRatio};min-height:${minHeight};`
+  : `min-height:${minHeight};height:100%;`;
 ---
 
 <div
-  class="lazy-embed relative bg-gray-100"
+  class:list={['lazy-embed relative bg-stone-100', className]}
   data-lazy-embed
   data-src={src}
   data-title={title}
   data-label={label}
-  style={`aspect-ratio:${aspectRatio};min-height:${minHeight}`}
+  style={style}
 >
   <noscript>
     <a
