@@ -1,0 +1,127 @@
+---
+// TODO(owner): replace src/assets/hero-placeholder.jpg with a real photo once
+// the restaurant owner provides one (see the hero image entry in the content
+// checklist). The current image is a plain placeholder graphic, not a photo.
+import { Image } from 'astro:assets';
+import { withBase } from '../lib/url';
+import { restaurant } from '../data/restaurant';
+import heroPlaceholder from '../assets/hero-placeholder.jpg';
+
+const hasDirections = Boolean(restaurant.googleMapsDirectionsUrl);
+const location = `${restaurant.address.village}, ${restaurant.address.city}`;
+---
+
+<section class="hero">
+  <div class="hero__text">
+    <h1>{restaurant.name}</h1>
+    <p class="hero__location">{location}</p>
+    {restaurant.tagline && <p class="hero__tagline">{restaurant.tagline}</p>}
+
+    <slot name="status" />
+
+    <div class="hero__cta">
+      <a class="button button--primary" href={withBase('/menu')}>Lihat menu</a>
+      {
+        hasDirections && (
+          <a
+            class="button button--secondary"
+            href={restaurant.googleMapsDirectionsUrl!}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Arah ke lokasi
+          </a>
+        )
+      }
+    </div>
+  </div>
+
+  <div class="hero__image">
+    <Image
+      src={heroPlaceholder}
+      alt={`Placeholder foto ${restaurant.name} — menunggu foto asli dari pemilik`}
+      width={1600}
+      height={1200}
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .hero__text {
+    padding: var(--sp-5) var(--sp-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+
+  .hero__location {
+    font-family: var(--font-display);
+    font-size: var(--fs-300);
+    margin: 0;
+  }
+
+  .hero__tagline {
+    margin: 0;
+  }
+
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    margin-top: var(--sp-2);
+  }
+
+  .button {
+    display: inline-block;
+    padding: var(--sp-2) var(--sp-4);
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+
+  .button--primary {
+    background: var(--sambal);
+    color: var(--salt);
+  }
+
+  .button--secondary {
+    background: transparent;
+    color: var(--ink);
+    text-decoration: underline;
+    padding-inline: 0;
+  }
+
+  .hero__image :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  @media (min-width: 960px) {
+    .hero {
+      grid-template-columns: 7fr 5fr;
+      background: var(--leaf);
+      color: var(--salt);
+    }
+
+    .hero__text {
+      padding: var(--sp-7) var(--sp-6);
+    }
+
+    .hero__location,
+    .hero h1 {
+      color: var(--salt);
+    }
+
+    .button--secondary {
+      color: var(--salt);
+    }
+  }
+</style>
