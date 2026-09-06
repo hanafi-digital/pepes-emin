@@ -4,6 +4,7 @@ import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import FeaturedMenu from '../components/FeaturedMenu.astro';
 import Reviews from '../components/Reviews.astro';
+import RestaurantJsonLd from '../components/RestaurantJsonLd.astro';
 import { restaurant } from '../data/restaurant';
 ---
 
@@ -12,6 +13,7 @@ import { restaurant } from '../data/restaurant';
   description="RM Pepes Jambal H. Emin adalah rumah makan Sunda di Walahar, Karawang, yang menyajikan pepes jambal, pepes ayam, ayam bakar, dan sate sapi."
   canonicalPath="/"
 >
+  <RestaurantJsonLd slot="head" />
   <Hero />
   <About />
   <FeaturedMenu />
