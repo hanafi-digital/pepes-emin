@@ -1,11 +1,9 @@
 ---
-import '../styles/tokens.css';
-import '../styles/global.css';
+import '../styles/tailwind.css';
 import Seo from '../components/Seo.astro';
 import { withBase } from '../lib/url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import bricolageFontUrl from '../assets/fonts/bricolage-grotesque-latin-variable.woff2?url';
 
 interface Props {
   title: string;
@@ -35,11 +33,6 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
     <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} />
-    {/* Only Bricolage Grotesque is preloaded: it's what Hero's visible
-        text (the LCP candidate) actually uses. Newsreader only appears
-        further down the page, so preloading it too would just compete
-        with the hero image for early bandwidth without helping LCP. */}
-    <link rel="preload" href={bricolageFontUrl} as="font" type="font/woff2" crossorigin />
     <Seo
       title={title}
       description={description}
@@ -50,12 +43,14 @@ const {
     />
     <slot name="head" />
   </head>
-  <body class={hasStickyContact ? 'has-sticky-cta' : undefined}>
+  <body class="bg-gray-50">
     <a href="#main" class="skip-link">Langsung ke konten utama</a>
-    <Header />
-    <main id="main">
-      <slot />
-    </main>
-    <Footer />
+    <div class:list={['mx-auto max-w-md bg-gray-50 min-h-screen shadow-xl', { 'pb-20': hasStickyContact }]}>
+      <Header />
+      <main id="main">
+        <slot />
+      </main>
+      <Footer />
+    </div>
   </body>
 </html>

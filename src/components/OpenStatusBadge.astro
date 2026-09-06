@@ -5,7 +5,12 @@
 // computed client-side, in Asia/Jakarta time, once the page loads.
 ---
 
-<span class="open-status" data-open-status>Lihat jam buka</span>
+<span
+  class="inline-block text-sm font-semibold text-gray-500 data-[open=true]:text-emerald-600"
+  data-open-status
+>
+  Lihat jam buka
+</span>
 
 <script>
   // Single script for every Jakarta-time-dependent page enhancement (badge
@@ -41,25 +46,3 @@
   const row = document.querySelector<HTMLElement>(`[data-hours-table] tr[data-day="${day}"]`);
   row?.setAttribute('data-today', 'true');
 </script>
-
-<style>
-  .open-status {
-    display: inline-block;
-    font-family: var(--font-display);
-    font-weight: 600;
-  }
-
-  /* --open-status-accent lets an ancestor (e.g. Hero's dark desktop
-     background) override this to something with real contrast against
-     it — --sambal on --leaf is only ~1.5:1, nowhere near AA. */
-  .open-status[data-open='true'] {
-    color: var(--open-status-accent, var(--sambal));
-  }
-
-  .open-status[data-open='false'] {
-    /* Inherit the ambient text color rather than forcing --ink, since
-       this badge also renders on dark (--leaf) backgrounds where --ink
-       would be nearly invisible. */
-    color: inherit;
-  }
-</style>

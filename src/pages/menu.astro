@@ -1,12 +1,10 @@
 ---
-import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PriceList from '../components/PriceList.astro';
-import { withBase } from '../lib/url';
+import MenuCard from '../components/MenuCard.astro';
+import Button from '../components/Button.astro';
+import { withBase, absoluteUrl } from '../lib/url';
 import { restaurant } from '../data/restaurant';
 import { menu } from '../data/menu';
-import heroPlaceholder from '../assets/hero-placeholder.jpg';
-import { absoluteUrl } from '../lib/url';
 import ContactCta from '../components/ContactCta.astro';
 
 const categoriesWithItems = menu.filter((category) => category.items.length > 0);
@@ -35,68 +33,50 @@ const breadcrumbJsonLd = {
     is:inline
   />
 
-  <section class="section container">
-    <h1>Daftar harga lengkap</h1>
+  <div class="p-4">
+    <h1 class="text-xl font-bold tracking-tight text-gray-900">Daftar harga lengkap</h1>
 
     {
       categoriesWithItems.length > 0 && (
-        <nav aria-label="Kategori menu" class="menu-nav">
+        <nav aria-label="Kategori menu" class="mt-3 flex flex-wrap gap-3">
           {categoriesWithItems.map((category) => (
-            <a href={`#${category.name.toLowerCase().replace(/\s+/g, '-')}`}>{category.name}</a>
+            <a
+              href={`#${category.name.toLowerCase().replace(/\s+/g, '-')}`}
+              class="text-sm font-medium text-emerald-600"
+            >
+              {category.name}
+            </a>
           ))}
         </nav>
       )
     }
-  </section>
 
-  <Image
-    src={heroPlaceholder}
-    alt={`Placeholder foto ${restaurant.name} — menunggu foto asli dari pemilik`}
-    width={1600}
-    height={1200}
-    loading="lazy"
-  />
+    {
+      categoriesWithItems.map((category) => (
+        <div id={category.name.toLowerCase().replace(/\s+/g, '-')} class="mt-6">
+          <h2 class="mb-3 text-base font-semibold text-gray-900">{category.name}</h2>
+          {category.items.map((item) => <MenuCard item={item} />)}
+        </div>
+      ))
+    }
 
-  <section class="section container">
-    <PriceList categories={menu} headingLevel="h2" />
+    <p class="mt-4 mb-3 text-sm text-gray-500">Harga dapat berubah.</p>
 
-    <p class="menu-page__disclaimer">Harga dapat berubah.</p>
-
-    <div class="menu-page__actions">
-      <a href={withBase('/')}>Kembali ke beranda</a>
+    <div class="flex flex-wrap gap-3">
+      <Button href={withBase('/')} variant="secondary">Kembali ke beranda</Button>
       {
         hasDirections && (
-          <a
+          <Button
             href={restaurant.googleMapsDirectionsUrl!}
             target="_blank"
             rel="noopener noreferrer"
           >
             Arah ke lokasi
-          </a>
+          </Button>
         )
       }
     </div>
-  </section>
+  </div>
+
   <ContactCta variant="sticky" />
 </BaseLayout>
-
-<style>
-  .menu-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-4);
-    margin-top: var(--sp-3);
-  }
-
-  .menu-page__disclaimer {
-    margin-top: var(--sp-4);
-    font-size: var(--fs-100);
-  }
-
-  .menu-page__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-4);
-    margin-top: var(--sp-3);
-  }
-</style>

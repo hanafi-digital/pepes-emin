@@ -22,13 +22,22 @@ function isActive(href: string): boolean {
 }
 ---
 
-<header>
-  <div class="container header__row">
-    <a href={withBase('/')} class="header__brand">{restaurant.name}</a>
-    <nav aria-label="Navigasi utama" class="header__nav">
+<header class="sticky top-0 z-50 border-b border-gray-100 bg-white/80 px-4 py-3 backdrop-blur-md">
+  <div class="flex items-center justify-between gap-3">
+    <a href={withBase('/')} class="text-lg font-bold tracking-tight text-gray-900">
+      {restaurant.name}
+    </a>
+    <nav
+      aria-label="Navigasi utama"
+      class="flex gap-4 overflow-x-auto [-webkit-overflow-scrolling:touch]"
+    >
       {
         navItems.map((item) => (
-          <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class="whitespace-nowrap text-sm font-medium text-gray-500 aria-[current=page]:text-emerald-600 aria-[current=page]:underline aria-[current=page]:underline-offset-4"
+          >
             {item.label}
           </a>
         ))
@@ -36,51 +45,3 @@ function isActive(href: string): boolean {
     </nav>
   </div>
 </header>
-
-<style>
-  header {
-    background: var(--leaf);
-    color: var(--salt);
-  }
-
-  .header__row {
-    padding-block: var(--sp-3);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-2);
-  }
-
-  .header__brand {
-    font-family: var(--font-display);
-    font-weight: 600;
-    text-decoration: none;
-    color: var(--salt);
-  }
-
-  .header__nav {
-    display: flex;
-    gap: var(--sp-4);
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .header__nav a {
-    color: var(--salt);
-    text-decoration: none;
-    white-space: nowrap;
-    padding-block: var(--sp-1);
-  }
-
-  .header__nav a[aria-current='page'] {
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
-  }
-
-  @media (min-width: 768px) {
-    .header__row {
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-    }
-  }
-</style>

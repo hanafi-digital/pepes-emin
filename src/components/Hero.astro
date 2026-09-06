@@ -5,38 +5,15 @@
 import { Image } from 'astro:assets';
 import { withBase } from '../lib/url';
 import { restaurant } from '../data/restaurant';
+import Button from './Button.astro';
 import heroPlaceholder from '../assets/hero-placeholder.jpg';
 
 const hasDirections = Boolean(restaurant.googleMapsDirectionsUrl);
 const location = `${restaurant.address.village}, ${restaurant.address.city}`;
 ---
 
-<section class="hero">
-  <div class="hero__text">
-    <h1>{restaurant.name}</h1>
-    <p class="hero__location">{location}</p>
-    {restaurant.tagline && <p class="hero__tagline">{restaurant.tagline}</p>}
-
-    <slot name="status" />
-
-    <div class="hero__cta">
-      <a class="button button--primary" href={withBase('/menu')}>Lihat menu</a>
-      {
-        hasDirections && (
-          <a
-            class="button button--secondary"
-            href={restaurant.googleMapsDirectionsUrl!}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Arah ke lokasi
-          </a>
-        )
-      }
-    </div>
-  </div>
-
-  <div class="hero__image">
+<section class="relative">
+  <div class="relative aspect-[4/3] w-full overflow-hidden">
     <Image
       src={heroPlaceholder}
       alt={`Placeholder foto ${restaurant.name} — menunggu foto asli dari pemilik`}
@@ -44,87 +21,42 @@ const location = `${restaurant.address.village}, ${restaurant.address.city}`;
       height={1200}
       loading="eager"
       fetchpriority="high"
+      class="h-full w-full object-cover"
     />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+
+    <span class="absolute top-4 left-4 rounded-full bg-amber-500 px-3 py-1 text-xs font-semibold text-white shadow-sm">
+      Spesialis Pepes Jambal
+    </span>
+
+    <div class="absolute right-4 bottom-4 left-4 text-white">
+      <h1 class="text-2xl font-bold tracking-tight text-white drop-shadow-sm">
+        {restaurant.name}
+      </h1>
+      <p class="text-sm font-medium text-white/90">{location}</p>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-3 p-4">
+    {restaurant.tagline && <p class="text-sm text-gray-500">{restaurant.tagline}</p>}
+
+    <slot name="status" />
+
+    <div class="flex flex-wrap gap-3">
+      <Button href={withBase('/menu')} class="flex-1">Lihat menu</Button>
+      {
+        hasDirections && (
+          <Button
+            href={restaurant.googleMapsDirectionsUrl!}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="secondary"
+            class="flex-1"
+          >
+            Arah ke lokasi
+          </Button>
+        )
+      }
+    </div>
   </div>
 </section>
-
-<style>
-  .hero {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  .hero__text {
-    padding: var(--sp-5) var(--sp-4);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-3);
-  }
-
-  .hero__location {
-    font-family: var(--font-display);
-    font-size: var(--fs-300);
-    margin: 0;
-  }
-
-  .hero__tagline {
-    margin: 0;
-  }
-
-  .hero__cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-3);
-    margin-top: var(--sp-2);
-  }
-
-  .button {
-    display: inline-block;
-    padding: var(--sp-2) var(--sp-4);
-    border-radius: var(--radius);
-    text-decoration: none;
-    font-family: var(--font-display);
-    font-weight: 600;
-  }
-
-  .button--primary {
-    background: var(--sambal);
-    color: var(--salt);
-  }
-
-  .button--secondary {
-    background: transparent;
-    color: var(--ink);
-    text-decoration: underline;
-    padding-inline: 0;
-  }
-
-  .hero__image :global(img) {
-    width: 100%;
-    height: auto;
-  }
-
-  @media (min-width: 960px) {
-    .hero {
-      grid-template-columns: 7fr 5fr;
-      background: var(--leaf);
-      color: var(--salt);
-      /* --sambal only has ~1.5:1 contrast against --leaf — override the
-         open-status badge's accent so "open now" stays readable here. */
-      --open-status-accent: var(--salt);
-    }
-
-    .hero__text {
-      padding: var(--sp-7) var(--sp-6);
-    }
-
-    .hero__location,
-    .hero h1 {
-      color: var(--salt);
-    }
-
-    .button--secondary {
-      color: var(--salt);
-    }
-  }
-</style>

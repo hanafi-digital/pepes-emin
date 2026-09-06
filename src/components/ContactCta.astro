@@ -18,14 +18,33 @@ const showPhoneButton = variant !== 'sticky' && hasPhone;
 // Nothing to show yet (all contact fields still unconfirmed) — render
 // nothing at all rather than an empty bar/strip.
 const hasAnyButton = hasDirections || Boolean(whatsappHref) || showPhoneButton;
+
+const wrapperClass =
+  variant === 'sticky'
+    ? 'fixed inset-x-0 bottom-0 z-50 mx-auto flex max-w-md gap-2 border-t border-gray-100 bg-white px-4 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] shadow-[0_-4px_12px_rgba(0,0,0,0.06)] md:hidden'
+    : variant === 'footer'
+      ? 'flex flex-wrap gap-3'
+      : 'flex flex-wrap gap-3';
+
+const primaryButtonClass =
+  variant === 'sticky'
+    ? 'flex-1 rounded-xl bg-emerald-600 py-3 px-4 text-center text-sm font-semibold text-white transition-transform active:scale-95 hover:bg-emerald-700'
+    : 'rounded-xl bg-emerald-600 py-3 px-4 text-sm font-semibold text-white transition-transform active:scale-95 hover:bg-emerald-700';
+
+const secondaryButtonClass =
+  variant === 'sticky'
+    ? 'flex-1 rounded-xl border border-emerald-600 py-3 px-4 text-center text-sm font-semibold text-emerald-700 transition-transform active:scale-95'
+    : variant === 'footer'
+      ? 'underline underline-offset-2 text-sm font-medium hover:text-white'
+      : 'rounded-xl border border-emerald-600 py-3 px-4 text-sm font-semibold text-emerald-700 transition-transform active:scale-95 hover:bg-emerald-50';
 ---
 
 {hasAnyButton && (
-<div class:list={['contact-cta', `contact-cta--${variant}`]}>
+<div class={wrapperClass}>
   {
     hasDirections && (
       <a
-        class="contact-cta__button contact-cta__button--primary"
+        class={primaryButtonClass}
         href={restaurant.googleMapsDirectionsUrl!}
         target="_blank"
         rel="noopener noreferrer"
@@ -36,80 +55,17 @@ const hasAnyButton = hasDirections || Boolean(whatsappHref) || showPhoneButton;
   }
   {
     whatsappHref && (
-      <a
-        class="contact-cta__button"
-        href={whatsappHref}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a class={secondaryButtonClass} href={whatsappHref} target="_blank" rel="noopener noreferrer">
         Hubungi via WhatsApp
       </a>
     )
   }
   {
     showPhoneButton && (
-      <a class="contact-cta__button" href={`tel:${restaurant.phone}`}>
+      <a class={secondaryButtonClass} href={`tel:${restaurant.phone}`}>
         Telepon {restaurant.phone}
       </a>
     )
   }
 </div>
 )}
-
-<style>
-  .contact-cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-3);
-  }
-
-  .contact-cta__button {
-    display: inline-block;
-    padding: var(--sp-2) var(--sp-4);
-    border-radius: var(--radius);
-    text-decoration: underline;
-    font-family: var(--font-display);
-    font-weight: 600;
-  }
-
-  .contact-cta--footer .contact-cta__button,
-  .contact-cta--inline .contact-cta__button {
-    text-decoration: underline;
-  }
-
-  .contact-cta__button--primary {
-    background: var(--sambal);
-    color: var(--salt);
-    text-decoration: none;
-  }
-
-  .contact-cta--sticky {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 50;
-    background: var(--leaf);
-    padding: var(--sp-2) var(--sp-4);
-    padding-bottom: calc(var(--sp-2) + env(safe-area-inset-bottom));
-    gap: var(--sp-2);
-  }
-
-  .contact-cta--sticky .contact-cta__button {
-    flex: 1;
-    text-align: center;
-    color: var(--salt);
-    text-decoration: none;
-    background: rgba(246, 242, 231, 0.12);
-  }
-
-  .contact-cta--sticky .contact-cta__button--primary {
-    background: var(--sambal);
-  }
-
-  @media (min-width: 768px) {
-    .contact-cta--sticky {
-      display: none;
-    }
-  }
-</style>

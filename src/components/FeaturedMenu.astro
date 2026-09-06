@@ -1,36 +1,21 @@
 ---
-import PriceList from './PriceList.astro';
+import MenuCard from './MenuCard.astro';
+import Button from './Button.astro';
 import { withBase } from '../lib/url';
 import { menu } from '../data/menu';
+
+const featuredItems = menu.flatMap((category) => category.items).filter((item) => item.isFeatured);
 ---
 
-<section id="menu" class="section featured-menu">
-  <div class="container">
-    <h2>Daftar harga</h2>
+<section id="menu" class="p-4">
+  <h2 class="mb-4 text-xl font-bold tracking-tight text-gray-900">Menu Favorit</h2>
 
-    <PriceList categories={menu} featuredOnly />
-
-    <p class="featured-menu__disclaimer">Harga dapat berubah.</p>
-    <a class="featured-menu__link" href={withBase('/menu')}>Lihat menu lengkap</a>
+  <div>
+    {featuredItems.map((item) => <MenuCard item={item} />)}
   </div>
+
+  <p class="mb-3 text-sm text-gray-500">Harga dapat berubah.</p>
+  <Button href={withBase('/menu')} variant="secondary" class="w-full">
+    Lihat menu lengkap
+  </Button>
 </section>
-
-<style>
-  .featured-menu {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .featured-menu__disclaimer {
-    margin-top: var(--sp-4);
-    font-size: var(--fs-100);
-    color: var(--ink);
-  }
-
-  .featured-menu__link {
-    margin-top: var(--sp-2);
-    display: inline-block;
-    text-decoration: underline;
-    width: fit-content;
-  }
-</style>
