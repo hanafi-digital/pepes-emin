@@ -1,8 +1,18 @@
 import type { DayOfWeek, OpeningHour } from "./types";
 
-// TODO(owner): every day below is unconfirmed. Until the owner confirms real
-// hours, every day stays closed with opens/closes null — never guess. Wrong
-// hours mean a customer travels here and finds it shut.
+// Confirmed against the restaurant's own Google Business Profile listing
+// (the hours real customers see when they look this place up). Friday is
+// the one day it's closed.
+
+const SCHEDULE: Record<DayOfWeek, { closed: boolean; opens: string | null; closes: string | null }> = {
+  monday: { closed: false, opens: "09:00", closes: "17:00" },
+  tuesday: { closed: false, opens: "09:00", closes: "17:00" },
+  wednesday: { closed: false, opens: "09:00", closes: "17:00" },
+  thursday: { closed: false, opens: "09:00", closes: "17:00" },
+  friday: { closed: true, opens: null, closes: null },
+  saturday: { closed: false, opens: "09:00", closes: "17:00" },
+  sunday: { closed: false, opens: "09:00", closes: "17:00" },
+};
 
 const DAYS: DayOfWeek[] = [
   "monday",
@@ -16,9 +26,7 @@ const DAYS: DayOfWeek[] = [
 
 export const openingHours: OpeningHour[] = DAYS.map((day) => ({
   day,
-  closed: true,
-  opens: null,
-  closes: null,
+  ...SCHEDULE[day],
 }));
 
 export const DAY_LABEL_ID: Record<DayOfWeek, string> = {

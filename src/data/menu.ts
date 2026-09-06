@@ -1,22 +1,19 @@
 import type { MenuCategory } from "./types";
 
-// Dish names below are grounded in web research (cross-referenced across
-// 3+ independent restaurant directories — see
-// docs/pepes-emin/research/adhoc-web-research-2026-09-06.md, workspace docs)
-// rather than the owner or an official menu. Existence of each dish is
-// well-corroborated; prices are not (no source had per-item prices), so
-// every price stays null pending aggregator research or owner confirmation.
-// Do not add a dish name that isn't backed by that research or the owner.
+// Prices and dish names below are confirmed against two independent
+// on-site sources that agree exactly: the restaurant's own printed menu
+// board and a photographed order receipt (both showing "Pepes Jambal Hj.
+// Muryati Hikmah (H. Emin)"). Per-item descriptions are not confirmed by
+// either source, so they stay null.
 
 export const menu: MenuCategory[] = [
   {
-    name: "Menu Utama",
+    name: "Pepes",
     items: [
       {
         name: "Pepes Jambal",
-        // TODO(owner): confirm description and price.
         description: null,
-        priceIdr: null,
+        priceIdr: 15000,
         image: null,
         isFeatured: true,
         isAvailable: true,
@@ -24,23 +21,31 @@ export const menu: MenuCategory[] = [
       {
         name: "Pepes Ayam",
         description: null,
-        priceIdr: null,
+        priceIdr: 20000,
         image: null,
         isFeatured: true,
         isAvailable: true,
       },
       {
-        name: "Ayam Bakar",
+        name: "Pepes Ikan Mas",
         description: null,
-        priceIdr: null,
+        priceIdr: 32000,
         image: null,
-        isFeatured: true,
+        isFeatured: false,
         isAvailable: true,
       },
       {
-        name: "Ikan Bakar",
+        name: "Pepes Peda",
         description: null,
-        priceIdr: null,
+        priceIdr: 13000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Pepes Jamur",
+        description: null,
+        priceIdr: 14000,
         image: null,
         isFeatured: false,
         isAvailable: true,
@@ -48,15 +53,31 @@ export const menu: MenuCategory[] = [
       {
         name: "Pepes Tahu",
         description: null,
-        priceIdr: null,
+        priceIdr: 6000,
         image: null,
         isFeatured: false,
         isAvailable: true,
       },
       {
-        name: "Pepes Jeroan",
+        name: "Pepes Oncom",
         description: null,
-        priceIdr: null,
+        priceIdr: 6000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Pepes Teri",
+        description: null,
+        priceIdr: 7000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Pepes Ati Ampela",
+        description: null,
+        priceIdr: 13000,
         image: null,
         isFeatured: false,
         isAvailable: true,
@@ -64,36 +85,132 @@ export const menu: MenuCategory[] = [
     ],
   },
   {
-    name: "Lauk Pendamping",
+    name: "Lauk & Pelengkap",
     items: [
       {
-        name: "Sate Sapi",
+        name: "Sate Maranggi",
         description: null,
-        priceIdr: null,
+        priceIdr: 45000,
+        image: null,
+        isFeatured: true,
+        isAvailable: true,
+      },
+      {
+        name: "Ikan Bakar",
+        description: null,
+        priceIdr: 40000,
         image: null,
         isFeatured: false,
         isAvailable: true,
       },
       {
-        name: "Sambal Lalapan",
+        name: "Bakakak (Ayam)",
         description: null,
-        priceIdr: null,
+        priceIdr: 100000,
         image: null,
         isFeatured: false,
         isAvailable: true,
       },
       {
-        name: "Gorengan",
+        name: "Sop",
         description: null,
-        priceIdr: null,
+        priceIdr: 25000,
         image: null,
         isFeatured: false,
         isAvailable: true,
       },
       {
-        name: "Nasi",
+        name: "Sayur Asem",
         description: null,
-        priceIdr: null,
+        priceIdr: 10000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Pecak Ikan Jaer Nila",
+        description: null,
+        priceIdr: 30000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Udang/Ikan Goreng",
+        description: null,
+        priceIdr: 20000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Ikan Goreng Kecil",
+        description: null,
+        priceIdr: 20000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Tahu",
+        description: null,
+        priceIdr: 2000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Tempe",
+        description: null,
+        priceIdr: 2000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Pete",
+        description: null,
+        priceIdr: 10000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Kerupuk",
+        description: null,
+        priceIdr: 3000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Lalap",
+        description: null,
+        priceIdr: 3000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Sambel",
+        description: null,
+        priceIdr: 3000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Makan (Nasi)",
+        description: null,
+        priceIdr: 10000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Bungkus Nasi",
+        description: null,
+        priceIdr: 5000,
         image: null,
         isFeatured: false,
         isAvailable: true,
@@ -101,9 +218,72 @@ export const menu: MenuCategory[] = [
     ],
   },
   {
-    // TODO(owner): no drink menu was found via web research — needs
-    // aggregator research or owner confirmation.
     name: "Minuman",
-    items: [],
+    items: [
+      {
+        name: "Es Teh Manis",
+        description: null,
+        priceIdr: 5000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Es Jeruk",
+        description: null,
+        priceIdr: 13000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Es Kelapa",
+        description: null,
+        priceIdr: 13000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Es Batu",
+        description: null,
+        priceIdr: 3000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Teh Pucuk",
+        description: null,
+        priceIdr: 5000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Kopi",
+        description: null,
+        priceIdr: 5000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Mineral",
+        description: null,
+        priceIdr: 5000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+      {
+        name: "Sprite",
+        description: null,
+        priceIdr: 5000,
+        image: null,
+        isFeatured: false,
+        isAvailable: true,
+      },
+    ],
   },
 ];
