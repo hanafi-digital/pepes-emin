@@ -14,7 +14,8 @@
           "height": 844,
           "deviceScaleFactor": 2,
           "disabled": false
-        }
+        },
+        "chromeFlags": "--no-sandbox --disable-dev-shm-usage"
       }
     },
     "assert": {
