@@ -1,0 +1,59 @@
+---
+// Server-rendered output is deliberately neutral: this page may be served
+// from a cache long after build time, so we can't compute "open now" at
+// build time without risking a stale, wrong answer. The real status is
+// computed client-side, in Asia/Jakarta time, once the page loads.
+---
+
+<span class="open-status" data-open-status>Lihat jam buka</span>
+
+<script>
+  // Single script for every Jakarta-time-dependent page enhancement (badge
+  // text + today's row in the hours table on Location), so the site ships
+  // one small module instead of several — every extra <script> here adds
+  // fixed per-module overhead on top of the shared logic it imports.
+  import { isOpenNow, jakartaDayAndMinutes } from '../lib/opening-hours';
+  import { openingHours, DAY_LABEL_ID } from '../data/opening-hours';
+
+  const badges = document.querySelectorAll<HTMLElement>('[data-open-status]');
+  if (badges.length > 0) {
+    const result = isOpenNow(openingHours, new Date());
+
+    let text: string;
+    if (!result.hasSchedule) {
+      text = 'Jam buka belum tersedia';
+    } else if (result.open && result.changeAt) {
+      text = `Buka sekarang — tutup pukul ${result.changeAt.time}`;
+    } else if (result.changeAt) {
+      const dayLabel = DAY_LABEL_ID[result.changeAt.day];
+      text = `Tutup — buka lagi ${dayLabel} pukul ${result.changeAt.time}`;
+    } else {
+      text = 'Tutup';
+    }
+
+    badges.forEach((el) => {
+      el.textContent = text;
+      el.dataset.open = String(result.open);
+    });
+  }
+
+  const { day } = jakartaDayAndMinutes(new Date());
+  const row = document.querySelector<HTMLElement>(`[data-hours-table] tr[data-day="${day}"]`);
+  row?.setAttribute('data-today', 'true');
+</script>
+
+<style>
+  .open-status {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+
+  .open-status[data-open='true'] {
+    color: var(--sambal);
+  }
+
+  .open-status[data-open='false'] {
+    color: var(--ink);
+  }
+</style>
