@@ -8,6 +8,7 @@ import Location from '../components/Location.astro';
 import OpenStatusBadge from '../components/OpenStatusBadge.astro';
 import RestaurantJsonLd from '../components/RestaurantJsonLd.astro';
 import LazyEmbed from '../components/LazyEmbed.astro';
+import ContactCta from '../components/ContactCta.astro';
 import { restaurant } from '../data/restaurant';
 
 // Built from the restaurant's name + researched address, not an official
@@ -34,6 +35,7 @@ const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery
   title={restaurant.name}
   description="RM Pepes Jambal H. Emin adalah rumah makan Sunda di Walahar, Karawang, yang menyajikan pepes jambal, pepes ayam, ayam bakar, dan sate sapi."
   canonicalPath="/"
+  hasStickyContact={Boolean(restaurant.googleMapsDirectionsUrl || restaurant.whatsapp)}
 >
   <RestaurantJsonLd slot="head" />
   <Hero>
@@ -50,4 +52,5 @@ const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery
       label="Buka peta di Google Maps"
     />
   </Location>
+  <ContactCta variant="sticky" />
 </BaseLayout>

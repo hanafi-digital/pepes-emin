@@ -1,6 +1,7 @@
 ---
 import { restaurant } from '../data/restaurant';
 import { openingHours, DAY_LABEL_ID } from '../data/opening-hours';
+import ContactCta from './ContactCta.astro';
 
 const { address } = restaurant;
 const addressLines = [
@@ -28,17 +29,7 @@ const year = new Date().getFullYear();
 
     <p>{hoursSummary}</p>
 
-    {restaurant.phone && (
-      <p>
-        Telepon: <a href={`tel:${restaurant.phone}`}>{restaurant.phone}</a>
-      </p>
-    )}
-
-    {restaurant.whatsapp && (
-      <p>
-        WhatsApp: <a href={`https://wa.me/${restaurant.whatsapp}`}>{restaurant.whatsapp}</a>
-      </p>
-    )}
+    <ContactCta variant="footer" />
 
     {restaurant.googleMapsUrl && (
       <p>

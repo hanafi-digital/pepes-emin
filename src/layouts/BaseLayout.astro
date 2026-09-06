@@ -12,10 +12,19 @@ interface Props {
   ogImage?: string;
   ogType?: 'website' | 'article';
   noindex?: boolean;
+  /** Reserves space so the sticky mobile contact bar doesn't cover the footer. */
+  hasStickyContact?: boolean;
 }
 
-const { title, description, canonicalPath, ogImage, ogType, noindex = false }: Props =
-  Astro.props;
+const {
+  title,
+  description,
+  canonicalPath,
+  ogImage,
+  ogType,
+  noindex = false,
+  hasStickyContact = false,
+}: Props = Astro.props;
 ---
 
 <html lang="id">
@@ -32,7 +41,7 @@ const { title, description, canonicalPath, ogImage, ogType, noindex = false }: P
     />
     <slot name="head" />
   </head>
-  <body>
+  <body class={hasStickyContact ? 'has-sticky-cta' : undefined}>
     <a href="#main" class="skip-link">Langsung ke konten utama</a>
     <Header />
     <main id="main">

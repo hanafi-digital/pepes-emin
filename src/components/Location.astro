@@ -2,6 +2,7 @@
 import { restaurant } from '../data/restaurant';
 import { openingHours, DAY_LABEL_ID } from '../data/opening-hours';
 import OpenStatusBadge from './OpenStatusBadge.astro';
+import ContactCta from './ContactCta.astro';
 
 const { address } = restaurant;
 const addressLines = [
@@ -46,7 +47,7 @@ const addressLines = [
   </div>
 
   <div class="location__contact">
-    <slot name="contact" />
+    <slot name="contact"><ContactCta variant="inline" /></slot>
   </div>
 </section>
 

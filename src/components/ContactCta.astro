@@ -1,0 +1,115 @@
+---
+import { restaurant } from '../data/restaurant';
+import { waLink } from '../lib/contact';
+
+interface Props {
+  variant: 'inline' | 'footer' | 'sticky';
+}
+
+const { variant } = Astro.props;
+
+const whatsappMessage = `Halo, saya ingin bertanya tentang ${restaurant.name}.`;
+// TODO(owner): confirm a WhatsApp number before this button can appear.
+const whatsappHref = waLink(restaurant.whatsapp, whatsappMessage);
+const hasDirections = Boolean(restaurant.googleMapsDirectionsUrl);
+// TODO(owner): confirm a phone number before this button can appear.
+const hasPhone = Boolean(restaurant.phone);
+const showPhoneButton = variant !== 'sticky' && hasPhone;
+// Nothing to show yet (all contact fields still unconfirmed) — render
+// nothing at all rather than an empty bar/strip.
+const hasAnyButton = hasDirections || Boolean(whatsappHref) || showPhoneButton;
+---
+
+{hasAnyButton && (
+<div class:list={['contact-cta', `contact-cta--${variant}`]}>
+  {
+    hasDirections && (
+      <a
+        class="contact-cta__button contact-cta__button--primary"
+        href={restaurant.googleMapsDirectionsUrl!}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Arah ke lokasi
+      </a>
+    )
+  }
+  {
+    whatsappHref && (
+      <a
+        class="contact-cta__button"
+        href={whatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Hubungi via WhatsApp
+      </a>
+    )
+  }
+  {
+    showPhoneButton && (
+      <a class="contact-cta__button" href={`tel:${restaurant.phone}`}>
+        Telepon {restaurant.phone}
+      </a>
+    )
+  }
+</div>
+)}
+
+<style>
+  .contact-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+  }
+
+  .contact-cta__button {
+    display: inline-block;
+    padding: var(--sp-2) var(--sp-4);
+    border-radius: var(--radius);
+    text-decoration: underline;
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+
+  .contact-cta--footer .contact-cta__button,
+  .contact-cta--inline .contact-cta__button {
+    text-decoration: underline;
+  }
+
+  .contact-cta__button--primary {
+    background: var(--sambal);
+    color: var(--salt);
+    text-decoration: none;
+  }
+
+  .contact-cta--sticky {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    background: var(--leaf);
+    padding: var(--sp-2) var(--sp-4);
+    padding-bottom: calc(var(--sp-2) + env(safe-area-inset-bottom));
+    gap: var(--sp-2);
+  }
+
+  .contact-cta--sticky .contact-cta__button {
+    flex: 1;
+    text-align: center;
+    color: var(--salt);
+    text-decoration: none;
+    background: rgba(246, 242, 231, 0.12);
+  }
+
+  .contact-cta--sticky .contact-cta__button--primary {
+    background: var(--sambal);
+  }
+
+  @media (min-width: 768px) {
+    .contact-cta--sticky {
+      display: none;
+    }
+  }
+</style>

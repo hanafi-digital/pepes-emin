@@ -47,6 +47,15 @@ body {
   line-height: 1.65;
 }
 
+/* Reserves space for the sticky mobile ContactCta so it doesn't cover
+   footer content. Only applies below the breakpoint where that bar
+   actually renders (see ContactCta.astro). */
+@media (max-width: 767px) {
+  body.has-sticky-cta {
+    padding-bottom: 5.5rem;
+  }
+}
+
 h1,
 h2,
 h3 {
