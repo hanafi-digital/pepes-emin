@@ -23,6 +23,7 @@ export interface Restaurant {
   name: string;
   tagline: string | null;
   description: string[];
+  highlights: string[];
   address: Address;
   landmark: string | null;
   geo: GeoCoordinates | null;
