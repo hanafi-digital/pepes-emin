@@ -12,86 +12,61 @@ const addressLines = [
 ].filter(Boolean);
 ---
 
-<section id="lokasi" class="section container location">
-  <h2>Lokasi &amp; Jam Buka</h2>
+<section id="lokasi" class="flex flex-col gap-4 p-4">
+  <h2 class="text-xl font-bold tracking-tight text-gray-900">Lokasi &amp; Jam Buka</h2>
 
   <OpenStatusBadge />
 
-  <address>
+  <address class="not-italic flex flex-col text-sm text-gray-500">
     {addressLines.map((line) => <span>{line}</span>)}
     {restaurant.landmark && <span>{restaurant.landmark}</span>}
   </address>
 
-  <table data-hours-table>
-    <caption>Jam buka RM Pepes Jambal H. Emin</caption>
+  <table data-hours-table class="w-full max-w-sm border-collapse text-sm">
+    <caption class="sr-only">Jam buka RM Pepes Jambal H. Emin</caption>
     <thead>
       <tr>
-        <th scope="col">Hari</th>
-        <th scope="col">Jam</th>
+        <th scope="col" class="border-b border-gray-100 py-1 pr-2 text-left font-semibold text-gray-900">
+          Hari
+        </th>
+        <th scope="col" class="border-b border-gray-100 py-1 text-left font-semibold text-gray-900">
+          Jam
+        </th>
       </tr>
     </thead>
     <tbody>
       {
         openingHours.map((h) => (
           <tr data-day={h.day}>
-            <th scope="row">{DAY_LABEL_ID[h.day]}</th>
-            <td>{h.closed || !h.opens || !h.closes ? 'Tutup' : `${h.opens}–${h.closes}`}</td>
+            <th scope="row" class="border-b border-gray-100 py-1 pr-2 text-left font-normal text-gray-900">
+              {DAY_LABEL_ID[h.day]}
+            </th>
+            <td class="border-b border-gray-100 py-1 tabular-nums text-gray-500">
+              {h.closed || !h.opens || !h.closes ? 'Tutup' : `${h.opens}–${h.closes}`}
+            </td>
           </tr>
         ))
       }
     </tbody>
   </table>
 
-  <div class="location__embed">
+  <div class="overflow-hidden rounded-xl border border-gray-100">
     <slot name="map" />
   </div>
 
-  <div class="location__contact">
+  <div>
     <slot name="contact"><ContactCta variant="inline" /></slot>
   </div>
 </section>
 
 <style>
-  .location {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-4);
-  }
-
-  address {
-    font-style: normal;
-    display: flex;
-    flex-direction: column;
-  }
-
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 24rem;
-  }
-
-  caption {
-    text-align: left;
-    font-size: var(--fs-100);
-    margin-bottom: var(--sp-2);
-  }
-
-  th,
-  td {
-    text-align: left;
-    padding: var(--sp-1) var(--sp-2);
-    border-bottom: 1px solid var(--rule);
-    font-variant-numeric: tabular-nums;
-  }
-
-  tr[data-today='true'] th,
-  tr[data-today='true'] td {
+  tr[data-today='true'] th {
     font-weight: 600;
   }
 
   tr[data-today='true'] th::after {
     content: ' (hari ini)';
     font-weight: 400;
-    font-size: var(--fs-100);
+    color: #6b7280;
   }
 </style>

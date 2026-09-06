@@ -6,12 +6,12 @@ import { restaurant } from '../data/restaurant';
 const hasMapsUrl = Boolean(restaurant.googleMapsUrl);
 ---
 
-<section id="ulasan" class="section container reviews">
-  <h2>Kata pelanggan</h2>
+<section id="ulasan" class="flex flex-col gap-4 p-4">
+  <h2 class="text-xl font-bold tracking-tight text-gray-900">Kata pelanggan</h2>
 
   {
     reviews.length > 0 && (
-      <div class="reviews__list">
+      <div class="flex flex-col gap-3">
         {reviews.map((review) => (
           <ReviewCard review={review} />
         ))}
@@ -19,12 +19,12 @@ const hasMapsUrl = Boolean(restaurant.googleMapsUrl);
     )
   }
 
-  <div id="google-reviews-embed" class="reviews__embed" />
+  <div id="google-reviews-embed" class="aspect-video min-h-[200px]" />
 
   {
     hasMapsUrl && (
       <a
-        class="reviews__cta"
+        class="w-fit text-sm font-medium text-emerald-600 underline underline-offset-2 hover:text-emerald-700"
         href={restaurant.googleMapsUrl!}
         target="_blank"
         rel="noopener noreferrer"
@@ -34,27 +34,3 @@ const hasMapsUrl = Boolean(restaurant.googleMapsUrl);
     )
   }
 </section>
-
-<style>
-  .reviews {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-5);
-  }
-
-  .reviews__list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-5);
-  }
-
-  .reviews__embed {
-    aspect-ratio: 16 / 9;
-    min-height: 200px;
-  }
-
-  .reviews__cta {
-    width: fit-content;
-    text-decoration: underline;
-  }
-</style>

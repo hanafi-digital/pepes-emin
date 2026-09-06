@@ -33,19 +33,26 @@ const hoursSummary = hasConfirmedHours
 const year = new Date().getFullYear();
 ---
 
-<footer>
-  <div class="container footer__grid">
-    <address>
+<footer class="bg-emerald-800 text-emerald-50">
+  <div class="px-4 py-8 flex flex-col gap-3 text-sm">
+    <address class="not-italic flex flex-col">
       {addressLines.map((line) => <span>{line}</span>)}
     </address>
 
-    <p>{hoursSummary}</p>
+    <p class="text-emerald-100">{hoursSummary}</p>
 
-    <ContactCta variant="footer" />
+    <div class="pt-1">
+      <ContactCta variant="footer" />
+    </div>
 
     {restaurant.googleMapsUrl && (
       <p>
-        <a href={restaurant.googleMapsUrl} target="_blank" rel="noopener noreferrer">
+        <a
+          class="underline underline-offset-2 hover:text-white"
+          href={restaurant.googleMapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Lihat di Google Maps
         </a>
       </p>
@@ -53,9 +60,14 @@ const year = new Date().getFullYear();
 
     {
       verifiedSocialLinks.length > 0 && (
-        <p class="footer__social">
+        <p class="flex gap-3">
           {verifiedSocialLinks.map((link) => (
-            <a href={link.url} target="_blank" rel="noopener noreferrer me">
+            <a
+              class="underline underline-offset-2 hover:text-white"
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer me"
+            >
               {PLATFORM_LABEL[link.platform] ?? link.platform}
             </a>
           ))}
@@ -63,40 +75,8 @@ const year = new Date().getFullYear();
       )
     }
 
-    <p class="footer__notice">{restaurant.name} — website ini adalah prototype. &copy; {year}</p>
+    <p class="mt-3 text-xs text-emerald-200">
+      {restaurant.name} — website ini adalah prototype. &copy; {year}
+    </p>
   </div>
 </footer>
-
-<style>
-  footer {
-    background: var(--leaf);
-    color: var(--salt);
-  }
-
-  .footer__grid {
-    padding-block: var(--sp-6);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-2);
-    font-size: var(--fs-100);
-  }
-
-  address {
-    font-style: normal;
-    display: flex;
-    flex-direction: column;
-  }
-
-  a {
-    color: var(--salt);
-  }
-
-  .footer__notice {
-    margin-top: var(--sp-3);
-  }
-
-  .footer__social {
-    display: flex;
-    gap: var(--sp-3);
-  }
-</style>

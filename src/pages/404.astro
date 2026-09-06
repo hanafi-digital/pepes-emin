@@ -10,24 +10,19 @@ import { restaurant } from '../data/restaurant';
   canonicalPath="/404"
   noindex
 >
-  <section class="section container">
-    <h1>Halaman tidak ditemukan</h1>
-    <p>
+  <section class="flex flex-col gap-4 p-4">
+    <h1 class="text-xl font-bold tracking-tight text-gray-900">Halaman tidak ditemukan</h1>
+    <p class="text-sm text-gray-500">
       Halaman yang Anda cari tidak ada. Coba kembali ke beranda atau lihat daftar harga
       lengkap kami.
     </p>
-    <p class="not-found__links">
-      <a href={withBase('/')}>Kembali ke beranda</a>
-      <a href={withBase('/menu')}>Lihat menu</a>
+    <p class="flex flex-col items-start gap-2">
+      <a class="text-sm font-medium text-emerald-600 underline underline-offset-2" href={withBase('/')}>
+        Kembali ke beranda
+      </a>
+      <a class="text-sm font-medium text-emerald-600 underline underline-offset-2" href={withBase('/menu')}>
+        Lihat menu
+      </a>
     </p>
   </section>
 </BaseLayout>
-
-<style>
-  .not-found__links {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-2);
-    align-items: flex-start;
-  }
-</style>
