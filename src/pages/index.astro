@@ -7,7 +7,27 @@ import Reviews from '../components/Reviews.astro';
 import Location from '../components/Location.astro';
 import OpenStatusBadge from '../components/OpenStatusBadge.astro';
 import RestaurantJsonLd from '../components/RestaurantJsonLd.astro';
+import LazyEmbed from '../components/LazyEmbed.astro';
 import { restaurant } from '../data/restaurant';
+
+// Built from the restaurant's name + researched address, not an official
+// Google Business Profile link (that's still unconfirmed — see
+// docs/pepes-emin/research/adhoc-web-research-2026-09-06.md, workspace
+// docs). The Walahar area has more than one similarly-named restaurant, so
+// this query is deliberately specific (full name + street number) to avoid
+// resolving to the wrong one. TODO(owner): replace with an official Google
+// Maps share link once confirmed, and verify the pin actually shows this
+// restaurant, not a nearby competitor.
+const mapQuery = [
+  restaurant.name,
+  restaurant.address.street,
+  restaurant.address.village,
+  restaurant.address.district,
+  restaurant.address.city,
+]
+  .filter(Boolean)
+  .join(', ');
+const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
 ---
 
 <BaseLayout
@@ -22,5 +42,12 @@ import { restaurant } from '../data/restaurant';
   <About />
   <FeaturedMenu />
   <Reviews />
-  <Location />
+  <Location>
+    <LazyEmbed
+      slot="map"
+      src={mapEmbedSrc}
+      title={`Peta lokasi ${restaurant.name}`}
+      label="Buka peta di Google Maps"
+    />
+  </Location>
 </BaseLayout>
