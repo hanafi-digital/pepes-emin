@@ -2,16 +2,17 @@
 import { restaurant } from '../data/restaurant';
 ---
 
-<section id="tentang" class="p-4">
-  <h2 class="mb-3 text-xl font-bold tracking-tight text-gray-900">Tentang</h2>
-
-  <div class="flex flex-col gap-3">
-    {restaurant.description.map((paragraph) => <p class="text-sm leading-relaxed text-gray-500">{paragraph}</p>)}
+<section id="tentang" class="mx-auto max-w-4xl px-4 py-6 lg:grid lg:grid-cols-2 lg:gap-8">
+  <div>
+    <h2 class="mb-3 text-xl font-bold tracking-tight text-gray-900">Tentang</h2>
+    <div class="flex flex-col gap-3">
+      {restaurant.description.map((paragraph) => <p class="text-sm leading-relaxed text-gray-500">{paragraph}</p>)}
+    </div>
   </div>
 
   {
     restaurant.highlights.length > 0 && (
-      <ul class="mt-4 flex flex-col gap-2">
+      <ul class="mt-4 flex flex-col gap-2 lg:mt-0 lg:self-center">
         {restaurant.highlights.map((item) => (
           <li class="flex items-start gap-2 text-sm text-gray-700">
             <span class="mt-0.5 text-emerald-600">✓</span>

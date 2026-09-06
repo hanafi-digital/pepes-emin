@@ -6,12 +6,12 @@ import { restaurant } from '../data/restaurant';
 const hasMapsUrl = Boolean(restaurant.googleMapsUrl);
 ---
 
-<section id="ulasan" class="flex flex-col gap-4 p-4">
+<section id="ulasan" class="mx-auto flex max-w-4xl flex-col gap-4 px-4 py-6">
   <h2 class="text-xl font-bold tracking-tight text-gray-900">Kata pelanggan</h2>
 
   {
     reviews.length > 0 && (
-      <div class="flex flex-col gap-3">
+      <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {reviews.map((review) => (
           <ReviewCard review={review} />
         ))}

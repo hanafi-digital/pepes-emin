@@ -45,7 +45,7 @@ const {
   </head>
   <body class="bg-gray-50">
     <a href="#main" class="skip-link">Langsung ke konten utama</a>
-    <div class:list={['mx-auto max-w-md bg-gray-50 min-h-screen shadow-xl', { 'pb-20': hasStickyContact }]}>
+    <div class:list={['min-h-screen bg-gray-50', { 'pb-20 md:pb-0': hasStickyContact }]}>
       <Header />
       <main id="main">
         <slot />
