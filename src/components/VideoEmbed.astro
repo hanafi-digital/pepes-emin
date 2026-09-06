@@ -1,0 +1,95 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  videoId: string;
+  title: string;
+  posterSrc: ImageMetadata;
+  posterAlt: string;
+  /** Shown below the video when it belongs to someone else's channel. */
+  channelName?: string;
+}
+
+const { videoId, title, posterSrc, posterAlt, channelName } = Astro.props;
+---
+
+<div class="video-embed">
+  <button
+    type="button"
+    class="video-embed__button"
+    data-video-embed
+    data-video-id={videoId}
+    data-video-title={title}
+    aria-label={`Putar video: ${title}`}
+  >
+    <Image src={posterSrc} alt={posterAlt} width={1280} height={720} loading="lazy" />
+    <span class="video-embed__play" aria-hidden="true">▶</span>
+  </button>
+
+  <noscript>
+    <a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" rel="noopener noreferrer">
+      Tonton video: {title}
+    </a>
+  </noscript>
+</div>
+
+{channelName && <p class="video-embed__attribution">Video oleh {channelName}</p>}
+
+<script is:inline>
+  document.querySelectorAll("[data-video-embed]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.dataset.videoId;
+      var f = document.createElement("iframe");
+      f.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1";
+      f.title = btn.dataset.videoTitle;
+      f.allow = "accelerometer; autoplay; encrypted-media; picture-in-picture";
+      f.allowFullscreen = true;
+      f.loading = "lazy";
+      f.style.cssText = "width:100%;height:100%;border:0";
+      btn.replaceWith(f);
+    });
+  });
+</script>
+
+<style>
+  .video-embed {
+    aspect-ratio: 16 / 9;
+    position: relative;
+  }
+
+  .video-embed__button {
+    all: unset;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .video-embed__button :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-embed__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fs-500);
+    color: var(--salt);
+    background: rgba(23, 19, 14, 0.35);
+  }
+
+  .video-embed__button:focus-visible .video-embed__play {
+    outline: 3px solid var(--sambal);
+    outline-offset: -3px;
+  }
+
+  .video-embed__attribution {
+    margin-top: var(--sp-2);
+    font-size: var(--fs-100);
+  }
+</style>
