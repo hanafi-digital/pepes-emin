@@ -15,6 +15,7 @@
     "validate:jsonld": "node scripts/validate-jsonld.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.3.1"
   },
   "devDependencies": {
