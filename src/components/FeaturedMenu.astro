@@ -1,0 +1,36 @@
+---
+import PriceList from './PriceList.astro';
+import { withBase } from '../lib/url';
+import { menu } from '../data/menu';
+---
+
+<section id="menu" class="section featured-menu">
+  <div class="container">
+    <h2>Daftar harga</h2>
+
+    <PriceList categories={menu} featuredOnly />
+
+    <p class="featured-menu__disclaimer">Harga dapat berubah.</p>
+    <a class="featured-menu__link" href={withBase('/menu')}>Lihat menu lengkap</a>
+  </div>
+</section>
+
+<style>
+  .featured-menu {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .featured-menu__disclaimer {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-100);
+    color: var(--ink);
+  }
+
+  .featured-menu__link {
+    margin-top: var(--sp-2);
+    display: inline-block;
+    text-decoration: underline;
+    width: fit-content;
+  }
+</style>
