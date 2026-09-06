@@ -6,31 +6,55 @@ import { restaurant } from '../data/restaurant';
 const hasMapsUrl = Boolean(restaurant.googleMapsUrl);
 ---
 
-<section id="ulasan" class="mx-auto flex max-w-4xl flex-col gap-4 px-4 py-6">
-  <h2 class="text-xl font-bold tracking-tight text-gray-900">Kata pelanggan</h2>
-
-  {
-    reviews.length > 0 && (
-      <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {reviews.map((review) => (
-          <ReviewCard review={review} />
-        ))}
+<section id="ulasan" class="py-12 sm:py-16 lg:py-20 bg-[#F4EEE3]/40 border-y border-stone-200/60">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div>
+        <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-800">
+          <span class="h-1 w-5 rounded-full bg-amber-600"></span>
+          <span>Kata Pelanggan</span>
+        </div>
+        <h2 class="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-stone-900">
+          Pengalaman Bersantap di RM H. Emin
+        </h2>
+        <p class="mt-2 text-sm sm:text-base text-stone-600 max-w-xl">
+          Bukti nyata kelezatan pepes jambal dan kenyamanan suasana makan bersama keluarga di Walahar.
+        </p>
       </div>
-    )
-  }
 
-  <div id="google-reviews-embed" class="aspect-video min-h-[200px]" />
+      <!-- Trust Badge -->
+      <div class="inline-flex items-center gap-2 rounded-2xl border border-stone-200/80 bg-white px-4 py-2.5 shadow-2xs">
+        <span class="text-amber-500 font-extrabold text-base">★ 4.4</span>
+        <div class="border-l border-stone-200 pl-2 text-left">
+          <span class="block text-xs font-bold text-stone-800">Google Maps Rating</span>
+          <span class="block text-[11px] text-stone-500">1.000+ Ulasan Pengunjung</span>
+        </div>
+      </div>
+    </div>
 
-  {
-    hasMapsUrl && (
-      <a
-        class="w-fit text-sm font-medium text-emerald-600 underline underline-offset-2 hover:text-emerald-700"
-        href={restaurant.googleMapsUrl!}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Baca semua ulasan di Google Maps
-      </a>
-    )
-  }
+    <!-- Review Cards Grid -->
+    <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
+      {reviews.map((review) => (
+        <ReviewCard review={review} />
+      ))}
+    </div>
+
+    {hasMapsUrl && (
+      <div class="mt-8 text-center sm:text-right">
+        <a
+          class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-emerald-800 hover:text-emerald-950 transition-colors underline underline-offset-4"
+          href={restaurant.googleMapsUrl!}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>Baca semua ulasan langsung di Google Maps</span>
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>
+      </div>
+    )}
+  </div>
 </section>

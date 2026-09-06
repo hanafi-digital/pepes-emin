@@ -4,18 +4,58 @@ import Button from './Button.astro';
 import { withBase } from '../lib/url';
 import { menu } from '../data/menu';
 
-const featuredItems = menu.flatMap((category) => category.items).filter((item) => item.isFeatured);
+const featuredItems = menu.flatMap((category) =>
+  category.items
+    .filter((item) => item.isFeatured)
+    .map((item) => ({ ...item, categoryName: category.name }))
+);
 ---
 
-<section id="menu" class="mx-auto max-w-4xl px-4 py-6">
-  <h2 class="mb-4 text-xl font-bold tracking-tight text-gray-900">Menu Favorit</h2>
+<section id="menu" class="py-12 sm:py-16 lg:py-20">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div>
+        <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-800">
+          <span class="h-1 w-5 rounded-full bg-amber-600"></span>
+          <span>Pilihan Terfavorit</span>
+        </div>
+        <h2 class="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-stone-900">
+          Menu Andalan RM H. Emin
+        </h2>
+        <p class="mt-2 text-sm sm:text-base text-stone-600 max-w-xl">
+          Pilihan hidangan pepes dan masakan khas Sunda paling disukai pengunjung, disajikan hangat dengan bumbu meresap.
+        </p>
+      </div>
 
-  <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-    {featuredItems.map((item) => <MenuCard item={item} />)}
+      <div class="hidden sm:block">
+        <Button href={withBase('/menu')} variant="secondary">
+          Lihat Semua Menu &rarr;
+        </Button>
+      </div>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
+      {featuredItems.map((item) => (
+        <MenuCard item={item} categoryName={item.categoryName} />
+      ))}
+    </div>
+
+    <!-- Bottom Mobile CTA & Note -->
+    <div class="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-2xl border border-stone-200/80 bg-white/70 p-4 sm:p-6 shadow-2xs">
+      <div class="flex items-center gap-3">
+        <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
+          ℹ️
+        </span>
+        <p class="text-xs sm:text-sm text-stone-600">
+          Tersedia puluhan pilihan menu pepes, ayam bakar, sate maranggi, sayur asem, dan minuman segar.
+        </p>
+      </div>
+      <div class="sm:hidden">
+        <Button href={withBase('/menu')} class="w-full">
+          Buka Daftar Menu Lengkap
+        </Button>
+      </div>
+    </div>
   </div>
-
-  <p class="mt-4 mb-3 text-sm text-gray-500">Harga dapat berubah.</p>
-  <Button href={withBase('/menu')} variant="secondary" class="w-full sm:w-auto">
-    Lihat menu lengkap
-  </Button>
 </section>

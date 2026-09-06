@@ -12,51 +12,109 @@ const hasDirections = Boolean(restaurant.googleMapsDirectionsUrl);
 const location = `${restaurant.address.village}, ${restaurant.address.city}`;
 ---
 
-<section class="relative mx-auto max-w-4xl lg:grid lg:grid-cols-2 lg:items-stretch lg:gap-8 lg:px-4 lg:py-8">
-  <div class="relative aspect-[4/3] w-full overflow-hidden lg:aspect-auto lg:rounded-2xl">
-    <Image
-      src={heroPlaceholder}
-      alt={`Placeholder foto ${restaurant.name} — menunggu foto asli dari pemilik`}
-      width={1600}
-      height={1200}
-      loading="eager"
-      fetchpriority="high"
-      class="h-full w-full object-cover"
-    />
-    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+<section class="relative overflow-hidden pt-6 pb-12 sm:pt-10 sm:pb-16 lg:py-20">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
+      <!-- Left Content Column -->
+      <div class="flex flex-col lg:col-span-7">
+        <div class="inline-flex w-fit items-center gap-2 rounded-full border border-amber-300/80 bg-amber-50/90 px-3.5 py-1 text-xs font-semibold text-amber-900 shadow-2xs">
+          <span class="inline-block h-2 w-2 rounded-full bg-amber-500"></span>
+          <span>Kuliner Otentik Khas Walahar • Karawang</span>
+        </div>
 
-    <span class="absolute top-4 left-4 rounded-full bg-amber-500 px-3 py-1 text-xs font-semibold text-white shadow-sm">
-      Spesialis Pepes Jambal
-    </span>
+        <h1 class="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-stone-900 leading-[1.18]">
+          {restaurant.name}
+        </h1>
 
-    <div class="absolute right-4 bottom-4 left-4 text-white">
-      <h1 class="text-2xl font-bold tracking-tight text-white drop-shadow-sm">
-        {restaurant.name}
-      </h1>
-      <p class="text-sm font-medium text-white/90">{location}</p>
-    </div>
-  </div>
+        <p class="mt-3 text-lg sm:text-xl font-medium text-emerald-900">
+          Nikmatnya Pepes Jambal Roti Asli Tepi Bendungan Walahar
+        </p>
 
-  <div class="flex flex-col gap-3 p-4 lg:justify-center lg:p-0">
-    {restaurant.tagline && <p class="text-sm text-gray-500">{restaurant.tagline}</p>}
+        <p class="mt-3 text-sm sm:text-base leading-relaxed text-stone-600 max-w-xl">
+          Olahan ikan jambal roti pilihan berbalut bumbu rempah khas Sunda, dibungkus daun pisang segar dan dikukus perlahan hingga aroma gurihnya meresap sempurna ke setiap suapan.
+        </p>
 
-    <slot name="status" />
+        <div class="mt-4">
+          <slot name="status" />
+        </div>
 
-    <div class="flex flex-wrap gap-3">
-      <Button href={withBase('/menu')} class="flex-1">Lihat menu</Button>
-      {
-        hasDirections && (
-          <Button
-            href={restaurant.googleMapsDirectionsUrl!}
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="secondary"
-            class="flex-1"
-          >
-            Arah ke lokasi
+        <div class="mt-6 flex flex-wrap items-center gap-3 sm:gap-4">
+          <Button href={withBase('/menu')} class="w-full sm:w-auto shadow-md shadow-emerald-900/10">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+              <path d="M7 2v20"/>
+              <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>
+            </svg>
+            Lihat Daftar Menu
           </Button>
-        )
-      }
+
+          {hasDirections && (
+            <Button
+              href={restaurant.googleMapsDirectionsUrl!}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="secondary"
+              class="w-full sm:w-auto"
+            >
+              <svg class="h-4 w-4 text-emerald-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+              </svg>
+              Arah ke Lokasi
+            </Button>
+          )}
+        </div>
+
+        <!-- Quick Feature Pillars -->
+        <div class="mt-8 grid grid-cols-3 gap-2 sm:gap-4 border-t border-stone-200/80 pt-6">
+          <div class="rounded-xl bg-white/60 p-2.5 sm:p-3 border border-stone-200/60 shadow-2xs">
+            <span class="block text-[11px] sm:text-xs text-stone-500 font-medium">Bahan Baku</span>
+            <span class="block text-xs sm:text-sm font-bold text-stone-900">Jambal Roti Pilihan</span>
+          </div>
+          <div class="rounded-xl bg-white/60 p-2.5 sm:p-3 border border-stone-200/60 shadow-2xs">
+            <span class="block text-[11px] sm:text-xs text-stone-500 font-medium">Aroma Alami</span>
+            <span class="block text-xs sm:text-sm font-bold text-stone-900">Bungkus Daun Pisang</span>
+          </div>
+          <div class="rounded-xl bg-white/60 p-2.5 sm:p-3 border border-stone-200/60 shadow-2xs">
+            <span class="block text-[11px] sm:text-xs text-stone-500 font-medium">Cita Rasa</span>
+            <span class="block text-xs sm:text-sm font-bold text-stone-900">Rempah Khas Sunda</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Visual Column -->
+      <div class="lg:col-span-5">
+        <div class="group relative overflow-hidden rounded-3xl border border-stone-200/80 bg-stone-900 shadow-xl aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5]">
+          <Image
+            src={heroPlaceholder}
+            alt={`Placeholder foto ${restaurant.name} — menunggu foto asli dari pemilik`}
+            width={1600}
+            height={1200}
+            loading="eager"
+            fetchpriority="high"
+            class="h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-transparent"></div>
+
+          <!-- Top Badge -->
+          <div class="absolute top-4 left-4 rounded-full bg-amber-500/90 px-3 py-1 text-xs font-bold text-white shadow-xs backdrop-blur-xs">
+            Spesialis Pepes Jambal
+          </div>
+
+          <!-- Top Right Location -->
+          <div class="absolute top-4 right-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-stone-800 shadow-xs backdrop-blur-xs">
+            📍 {location}
+          </div>
+
+          <!-- Bottom Card Content -->
+          <div class="absolute right-4 bottom-4 left-4 text-white">
+            <div class="rounded-2xl bg-black/40 p-3.5 backdrop-blur-md border border-white/10">
+              <span class="text-xs font-semibold text-amber-300">Menu Andalan Tradisional</span>
+              <p class="text-base sm:text-lg font-bold text-white">Pepes Jambal & Aneka Lauk Sunda</p>
+              <p class="text-xs text-stone-300">Siap disantap hangat bersama nasi liwet & sambal dadak</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

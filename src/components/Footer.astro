@@ -1,7 +1,7 @@
 ---
 import { restaurant } from '../data/restaurant';
 import { openingHours, DAY_LABEL_ID } from '../data/opening-hours';
-import ContactCta from './ContactCta.astro';
+import { withBase } from '../lib/url';
 
 const PLATFORM_LABEL: Record<string, string> = {
   instagram: 'Instagram',
@@ -11,8 +11,6 @@ const PLATFORM_LABEL: Record<string, string> = {
   tiktok: 'TikTok',
 };
 
-// Only accounts verified as belonging to this restaurant appear here — see
-// docs/pepes-emin/research (workspace docs) for the verification criteria.
 const verifiedSocialLinks = restaurant.socialLinks.filter((link) => link.verified);
 
 const { address } = restaurant;
@@ -33,50 +31,118 @@ const hoursSummary = hasConfirmedHours
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-emerald-800 text-emerald-50">
-  <div class="mx-auto flex max-w-4xl flex-col gap-3 px-4 py-8 text-sm">
-    <address class="not-italic flex flex-col">
-      {addressLines.map((line) => <span>{line}</span>)}
-    </address>
+<footer class="bg-[#112D20] text-stone-300 border-t border-emerald-950">
+  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+    <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      <!-- Col 1: Brand Info -->
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center gap-2.5">
+          <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-800 text-white">
+            <svg class="h-5 w-5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+              <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+            </svg>
+          </div>
+          <span class="text-base font-bold tracking-tight text-white">
+            {restaurant.name}
+          </span>
+        </div>
+        <p class="text-xs sm:text-sm text-stone-400 leading-relaxed">
+          Rumah makan Sunda legendaris di Walahar, Karawang. Menyajikan pepes jambal roti autentik, ayam bakar, dan aneka lauk tradisional.
+        </p>
+      </div>
 
-    <p class="text-emerald-100">{hoursSummary}</p>
+      <!-- Col 2: Quick Links -->
+      <div>
+        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-3">
+          Navigasi Cepat
+        </h4>
+        <ul class="flex flex-col gap-2 text-xs sm:text-sm">
+          <li>
+            <a href={withBase('/')} class="hover:text-white transition-colors">Beranda</a>
+          </li>
+          <li>
+            <a href={withBase('/#tentang')} class="hover:text-white transition-colors">Tentang Kami</a>
+          </li>
+          <li>
+            <a href={withBase('/#menu')} class="hover:text-white transition-colors">Menu Favorit</a>
+          </li>
+          <li>
+            <a href={withBase('/menu')} class="hover:text-white transition-colors">Daftar Menu Lengkap</a>
+          </li>
+          <li>
+            <a href={withBase('/#ulasan')} class="hover:text-white transition-colors">Kata Pelanggan</a>
+          </li>
+          <li>
+            <a href={withBase('/#lokasi')} class="hover:text-white transition-colors">Lokasi &amp; Jam</a>
+          </li>
+        </ul>
+      </div>
 
-    <div class="pt-1">
-      <ContactCta variant="footer" />
+      <!-- Col 3: Hours Summary -->
+      <div>
+        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-3">
+          Jam Operasional
+        </h4>
+        <p class="text-xs sm:text-sm text-stone-300 leading-relaxed mb-2">
+          {hoursSummary}
+        </p>
+        <p class="text-xs text-stone-400">
+          * Hari Jumat Tutup
+        </p>
+      </div>
+
+      <!-- Col 4: Location & Action -->
+      <div>
+        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-3">
+          Alamat Rumah Makan
+        </h4>
+        <address class="not-italic flex flex-col text-xs sm:text-sm text-stone-300 leading-snug mb-4">
+          {addressLines.map((line) => <span>{line}</span>)}
+        </address>
+
+        <div class="flex flex-col gap-2">
+          {restaurant.googleMapsDirectionsUrl && (
+            <a
+              href={restaurant.googleMapsDirectionsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-300 hover:text-white underline underline-offset-4"
+            >
+              <span>Petunjuk Rute di Google Maps</span>
+              <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
+          )}
+
+          {verifiedSocialLinks.length > 0 && (
+            <div class="mt-2 flex gap-3 text-xs">
+              {verifiedSocialLinks.map((link) => (
+                <a
+                  class="text-stone-400 hover:text-white underline underline-offset-2"
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer me"
+                >
+                  {PLATFORM_LABEL[link.platform] ?? link.platform}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
 
-    {restaurant.googleMapsUrl && (
+    <!-- Bottom Copyright -->
+    <div class="mt-12 border-t border-emerald-900/60 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-400">
       <p>
-        <a
-          class="underline underline-offset-2 hover:text-white"
-          href={restaurant.googleMapsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Lihat di Google Maps
-        </a>
+        &copy; {year} {restaurant.name} — Walahar, Karawang.
       </p>
-    )}
-
-    {
-      verifiedSocialLinks.length > 0 && (
-        <p class="flex gap-3">
-          {verifiedSocialLinks.map((link) => (
-            <a
-              class="underline underline-offset-2 hover:text-white"
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer me"
-            >
-              {PLATFORM_LABEL[link.platform] ?? link.platform}
-            </a>
-          ))}
-        </p>
-      )
-    }
-
-    <p class="mt-3 text-xs text-emerald-200">
-      {restaurant.name} — website ini adalah prototype. &copy; {year}
-    </p>
+      <p class="text-stone-500">
+        Website Prototype Resmi. Dibuat untuk kenyamanan pengunjung.
+      </p>
+    </div>
   </div>
 </footer>

@@ -2,27 +2,35 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { withBase } from '../lib/url';
 import { restaurant } from '../data/restaurant';
+import Button from '../components/Button.astro';
 ---
 
 <BaseLayout
-  title={`Halaman tidak ditemukan — ${restaurant.name}`}
+  title={`Halaman Tidak Ditemukan — ${restaurant.name}`}
   description="Halaman yang Anda cari tidak ditemukan."
   canonicalPath="/404"
   noindex
 >
-  <section class="mx-auto flex max-w-4xl flex-col gap-4 px-4 py-6">
-    <h1 class="text-xl font-bold tracking-tight text-gray-900">Halaman tidak ditemukan</h1>
-    <p class="text-sm text-gray-500">
-      Halaman yang Anda cari tidak ada. Coba kembali ke beranda atau lihat daftar harga
-      lengkap kami.
+  <div class="mx-auto max-w-3xl px-4 py-16 sm:py-24 text-center">
+    <div class="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-100 text-amber-900 text-2xl font-bold mb-6">
+      404
+    </div>
+
+    <h1 class="text-2xl sm:text-3xl font-extrabold text-stone-900 tracking-tight">
+      Halaman Tidak Ditemukan
+    </h1>
+
+    <p class="mt-3 text-sm sm:text-base text-stone-600 max-w-md mx-auto leading-relaxed">
+      Halaman yang Anda tuju tidak tersedia atau tautan sudah berpindah. Silakan kembali ke halaman utama untuk melihat informasi rumah makan dan daftar menu kami.
     </p>
-    <p class="flex flex-col items-start gap-2">
-      <a class="text-sm font-medium text-emerald-600 underline underline-offset-2" href={withBase('/')}>
-        Kembali ke beranda
-      </a>
-      <a class="text-sm font-medium text-emerald-600 underline underline-offset-2" href={withBase('/menu')}>
-        Lihat menu
-      </a>
-    </p>
-  </section>
+
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <Button href={withBase('/')}>
+        Kembali ke Beranda
+      </Button>
+      <Button href={withBase('/menu')} variant="secondary">
+        Lihat Daftar Menu
+      </Button>
+    </div>
+  </div>
 </BaseLayout>

@@ -2,24 +2,95 @@
 import { restaurant } from '../data/restaurant';
 ---
 
-<section id="tentang" class="mx-auto max-w-4xl px-4 py-6 lg:grid lg:grid-cols-2 lg:gap-8">
-  <div>
-    <h2 class="mb-3 text-xl font-bold tracking-tight text-gray-900">Tentang</h2>
-    <div class="flex flex-col gap-3">
-      {restaurant.description.map((paragraph) => <p class="text-sm leading-relaxed text-gray-500">{paragraph}</p>)}
+<section id="tentang" class="py-12 sm:py-16 lg:py-20 bg-[#F4EEE3]/50 border-y border-stone-200/60">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14 items-center">
+      <!-- Left: Story Text -->
+      <div class="lg:col-span-6">
+        <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-800">
+          <span class="h-1 w-5 rounded-full bg-amber-600"></span>
+          <span>Tentang Kami</span>
+        </div>
+
+        <h2 class="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-stone-900 leading-tight">
+          Cerita Tradisi &amp; Cita Rasa Sunda di Walahar
+        </h2>
+
+        <div class="mt-4 flex flex-col gap-3 text-stone-600 leading-relaxed text-sm sm:text-base">
+          {restaurant.description.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+
+        <!-- Cash Only Alert Box -->
+        <div class="mt-6 flex items-start gap-3 rounded-2xl border border-amber-200/80 bg-amber-50/80 p-4 text-xs sm:text-sm text-amber-900">
+          <svg class="h-5 w-5 shrink-0 text-amber-700 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <div>
+            <span class="font-bold">Informasi Pembayaran:</span>
+            <p class="mt-0.5 text-amber-800/90">Saat ini transaksi di rumah makan melayani pembayaran tunai (cash).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Feature Cards Grid -->
+      <div class="lg:col-span-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="rounded-2xl border border-stone-200/80 bg-white p-5 shadow-xs transition-transform hover:-translate-y-0.5">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-800 mb-3">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
+                <path d="m9 12 2 2 4-4"/>
+              </svg>
+            </div>
+            <h3 class="text-base font-bold text-stone-900">Ikan Jambal Roti</h3>
+            <p class="mt-1 text-xs text-stone-500 leading-relaxed">
+              Daging ikan tebal dengan tekstur empuk dan gurih pas, diolah secara higienis setiap hari.
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-stone-200/80 bg-white p-5 shadow-xs transition-transform hover:-translate-y-0.5">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-100 text-amber-800 mb-3">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+              </svg>
+            </div>
+            <h3 class="text-base font-bold text-stone-900">Bungkus Daun Alami</h3>
+            <p class="mt-1 text-xs text-stone-500 leading-relaxed">
+              Dikukus dan dibakar berbalut daun pisang segar untuk menghasilkan aroma harum yang khas.
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-stone-200/80 bg-white p-5 shadow-xs transition-transform hover:-translate-y-0.5">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-rose-100 text-rose-800 mb-3">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3c-1.5 0-3 .5-4 1.5-1.5 1.5-2 3.5-1.5 5.5.5 2 2 3.5 3.5 5 1 1 2 2 2 3 0-1 1-2 2-3 1.5-1.5 3-3 3.5-5 .5-2 0-4-1.5-5.5-1-1-2.5-1.5-4-1.5z"/>
+              </svg>
+            </div>
+            <h3 class="text-base font-bold text-stone-900">Rempah Khas Sunda</h3>
+            <p class="mt-1 text-xs text-stone-500 leading-relaxed">
+              Kombinasi cabai, bawang, serai, kunyit, dan daun kemangi segar yang meresap hingga ke tulang.
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-stone-200/80 bg-white p-5 shadow-xs transition-transform hover:-translate-y-0.5">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-blue-800 mb-3">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <h3 class="text-base font-bold text-stone-900">Dekat Bendungan</h3>
+            <p class="mt-1 text-xs text-stone-500 leading-relaxed">
+              Mudah dijangkau di kawasan Walahar, menjadi tempat singgah favorit keluarga dan rombongan.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  {
-    restaurant.highlights.length > 0 && (
-      <ul class="mt-4 flex flex-col gap-2 lg:mt-0 lg:self-center">
-        {restaurant.highlights.map((item) => (
-          <li class="flex items-start gap-2 text-sm text-gray-700">
-            <span class="mt-0.5 text-emerald-600">✓</span>
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-    )
-  }
 </section>

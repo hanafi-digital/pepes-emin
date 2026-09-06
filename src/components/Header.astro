@@ -4,16 +4,15 @@ import { restaurant } from '../data/restaurant';
 
 const navItems = [
   { label: 'Tentang', href: withBase('/#tentang') },
-  { label: 'Menu', href: withBase('/menu') },
+  { label: 'Menu Favorit', href: withBase('/#menu') },
+  { label: 'Daftar Menu', href: withBase('/menu') },
   { label: 'Ulasan', href: withBase('/#ulasan') },
-  { label: 'Lokasi', href: withBase('/#lokasi') },
+  { label: 'Lokasi & Jam', href: withBase('/#lokasi') },
 ];
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '');
 
 function isActive(href: string): boolean {
-  // In-page anchors (e.g. "/#tentang") are same-page jumps, not distinct
-  // routes, and should never be marked as the current page.
   if (href.includes('#')) {
     return false;
   }
@@ -22,23 +21,71 @@ function isActive(href: string): boolean {
 }
 ---
 
-<header class="sticky top-0 z-50 border-b border-gray-100 bg-white/80 backdrop-blur-md">
-  <div class="mx-auto flex max-w-4xl flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-    <a href={withBase('/')} class="text-lg font-bold tracking-tight text-gray-900">
-      {restaurant.name}
+<header class="sticky top-0 z-40 border-b border-stone-200/80 bg-white/90 shadow-xs backdrop-blur-md transition-all">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+    <!-- Brand -->
+    <a href={withBase('/')} class="group flex items-center gap-3">
+      <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-900 text-white shadow-sm transition-transform group-hover:scale-105">
+        <svg class="h-5 w-5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+          <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+        </svg>
+      </div>
+      <div>
+        <span class="block text-base sm:text-lg font-bold tracking-tight text-stone-900 group-hover:text-emerald-900 transition-colors">
+          {restaurant.name}
+        </span>
+        <span class="block text-xs font-medium text-stone-500">
+          Walahar, Klari — Karawang
+        </span>
+      </div>
     </a>
-    <nav aria-label="Navigasi utama" class="flex flex-wrap gap-x-4 gap-y-1">
+
+    <!-- Desktop Nav -->
+    <nav aria-label="Navigasi utama" class="hidden md:flex items-center gap-1 lg:gap-2">
       {
         navItems.map((item) => (
           <a
             href={item.href}
             aria-current={isActive(item.href) ? 'page' : undefined}
-            class="whitespace-nowrap text-sm font-medium text-gray-500 aria-[current=page]:text-emerald-600 aria-[current=page]:underline aria-[current=page]:underline-offset-4"
+            class="rounded-lg px-3 py-2 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-100 hover:text-emerald-900 aria-[current=page]:bg-emerald-50 aria-[current=page]:text-emerald-900 aria-[current=page]:font-semibold"
           >
             {item.label}
           </a>
         ))
       }
     </nav>
+
+    <!-- Header Actions -->
+    <div class="hidden sm:flex items-center gap-3">
+      {restaurant.googleMapsDirectionsUrl && (
+        <a
+          href={restaurant.googleMapsDirectionsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-xl bg-emerald-800 px-4 py-2 text-xs font-semibold text-white shadow-xs transition-all hover:bg-emerald-900 active:scale-95"
+        >
+          <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+          </svg>
+          Arah Lokasi
+        </a>
+      )}
+    </div>
+  </div>
+
+  <!-- Mobile Sub-Nav Strip -->
+  <div class="flex md:hidden border-t border-stone-100 bg-[#FAF7F2]/90 px-4 py-2 overflow-x-auto no-scrollbar gap-2">
+    {
+      navItems.map((item) => (
+        <a
+          href={item.href}
+          aria-current={isActive(item.href) ? 'page' : undefined}
+          class="shrink-0 rounded-full px-3 py-1 text-xs font-medium text-stone-600 border border-stone-200/80 bg-white shadow-2xs hover:bg-emerald-50 hover:text-emerald-900 aria-[current=page]:bg-emerald-800 aria-[current=page]:text-white aria-[current=page]:border-emerald-800"
+        >
+          {item.label}
+        </a>
+      ))
+    }
   </div>
 </header>
