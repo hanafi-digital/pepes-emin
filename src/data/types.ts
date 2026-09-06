@@ -68,6 +68,6 @@ export interface MenuCategory {
 
 export interface Review {
   quote: string;
-  author: string;
+  author: string | null;
   source: string;
 }

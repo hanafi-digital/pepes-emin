@@ -1,0 +1,35 @@
+---
+import type { Review } from '../data/types';
+
+interface Props {
+  review: Review;
+}
+
+const { review } = Astro.props;
+---
+
+<blockquote>
+  <p>&ldquo;{review.quote}&rdquo;</p>
+  <cite>{review.author ? `${review.author} — ${review.source}` : review.source}</cite>
+</blockquote>
+
+<style>
+  blockquote {
+    margin: 0;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: var(--fs-300);
+  }
+
+  blockquote p {
+    margin: 0;
+  }
+
+  cite {
+    display: block;
+    margin-top: var(--sp-2);
+    font-style: normal;
+    font-size: var(--fs-100);
+    color: var(--ink);
+  }
+</style>
