@@ -16,7 +16,13 @@ export const restaurant: Restaurant = {
   // cuisine) — no founding year, awards, or unverified claims.
   description: [
     "RM Pepes Jambal H. Emin adalah rumah makan Sunda di Walahar, Karawang, yang menyajikan pepes jambal.",
+    "Pepes jambal adalah olahan ikan jambal roti yang dibungkus daun pisang lalu dikukus atau dibakar bersama bumbu khas Sunda.",
   ],
+
+  // TODO(owner): confirm 3-4 specific strengths (recipe, sourcing, setting,
+  // etc.) with the owner before publishing any. Left empty rather than
+  // filled with unverified claims.
+  highlights: [],
 
   address: {
     // TODO(owner): confirm street name and number.
