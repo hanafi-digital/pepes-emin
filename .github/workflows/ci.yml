@@ -8,6 +8,7 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,6 +34,10 @@ jobs:
       - name: Validate JSON-LD
         run: npm run validate:jsonld
 
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@v1
+        id: setup-chrome
+
       - name: Lighthouse CI
         # audit:lh builds again, starts the preview server (which correctly
         # serves the configured /pepes-emin base path — lhci's own
@@ -41,6 +46,7 @@ jobs:
         # the real site), runs lhci against it, then stops the server.
         run: npm run audit:lh
         env:
+          CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 
       - name: Upload Lighthouse reports
