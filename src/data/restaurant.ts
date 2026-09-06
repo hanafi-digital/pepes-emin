@@ -46,8 +46,8 @@ export const restaurant: Restaurant = {
     "Pepes jambal dibungkus daun pisang, dikukus/dibakar dengan bumbu Sunda",
     "Menu lengkap: pepes, sate maranggi, ikan bakar, bakakak, hingga minuman",
     "Berada langsung di Jalan Bendungan Walahar",
-    // Confirmed via the restaurant's Google Business Profile listing.
-    "Pembayaran tunai (cash) saja",
+    // Confirmed via restaurant owner feedback: cash and QRIS accepted.
+    "Pembayaran tunai (cash) dan QRIS",
   ],
 
   address: {
