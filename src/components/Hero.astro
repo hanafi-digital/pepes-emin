@@ -109,6 +109,9 @@ const location = `${restaurant.address.village}, ${restaurant.address.city}`;
       grid-template-columns: 7fr 5fr;
       background: var(--leaf);
       color: var(--salt);
+      /* --sambal only has ~1.5:1 contrast against --leaf — override the
+         open-status badge's accent so "open now" stays readable here. */
+      --open-status-accent: var(--salt);
     }
 
     .hero__text {
