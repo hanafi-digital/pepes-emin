@@ -4,14 +4,15 @@ import { waLink } from '../lib/contact';
 
 interface Props {
   variant: 'inline' | 'footer' | 'sticky';
+  showDirections?: boolean;
 }
 
-const { variant } = Astro.props;
+const { variant, showDirections = true } = Astro.props;
 
 const whatsappMessage = `Halo, saya ingin bertanya tentang ${restaurant.name}.`;
 // TODO(owner): confirm a WhatsApp number before this button can appear.
 const whatsappHref = waLink(restaurant.whatsapp, whatsappMessage);
-const hasDirections = Boolean(restaurant.googleMapsDirectionsUrl);
+const hasDirections = Boolean(restaurant.googleMapsDirectionsUrl) && showDirections;
 // TODO(owner): confirm a phone number before this button can appear.
 const hasPhone = Boolean(restaurant.phone);
 const showPhoneButton = variant !== 'sticky' && hasPhone;
