@@ -1,13 +1,39 @@
 ---
-// Minimal scaffold. Navigation links, mobile behavior, and aria-current
-// wiring are filled in when the header's content is finalized.
 import { withBase } from '../lib/url';
 import { restaurant } from '../data/restaurant';
+
+const navItems = [
+  { label: 'Tentang', href: withBase('/#tentang') },
+  { label: 'Menu', href: withBase('/menu') },
+  { label: 'Ulasan', href: withBase('/#ulasan') },
+  { label: 'Lokasi', href: withBase('/#lokasi') },
+];
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '');
+
+function isActive(href: string): boolean {
+  // In-page anchors (e.g. "/#tentang") are same-page jumps, not distinct
+  // routes, and should never be marked as the current page.
+  if (href.includes('#')) {
+    return false;
+  }
+  const hrefPath = href.replace(/\/$/, '');
+  return hrefPath !== '' && hrefPath === currentPath;
+}
 ---
 
 <header>
-  <div class="container">
-    <a href={withBase('/')}>{restaurant.name}</a>
+  <div class="container header__row">
+    <a href={withBase('/')} class="header__brand">{restaurant.name}</a>
+    <nav aria-label="Navigasi utama" class="header__nav">
+      {
+        navItems.map((item) => (
+          <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
   </div>
 </header>
 
@@ -17,13 +43,44 @@ import { restaurant } from '../data/restaurant';
     color: var(--salt);
   }
 
-  .container {
+  .header__row {
     padding-block: var(--sp-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
   }
 
-  a {
+  .header__brand {
     font-family: var(--font-display);
     font-weight: 600;
     text-decoration: none;
+    color: var(--salt);
+  }
+
+  .header__nav {
+    display: flex;
+    gap: var(--sp-4);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .header__nav a {
+    color: var(--salt);
+    text-decoration: none;
+    white-space: nowrap;
+    padding-block: var(--sp-1);
+  }
+
+  .header__nav a[aria-current='page'] {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  @media (min-width: 768px) {
+    .header__row {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
 </style>

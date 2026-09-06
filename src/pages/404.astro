@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/url';
+import { restaurant } from '../data/restaurant';
+---
+
+<BaseLayout
+  title={`Halaman tidak ditemukan — ${restaurant.name}`}
+  description="Halaman yang Anda cari tidak ditemukan."
+  noindex
+>
+  <section class="section container">
+    <h1>Halaman tidak ditemukan</h1>
+    <p>
+      Halaman yang Anda cari tidak ada. Coba kembali ke beranda atau lihat daftar harga
+      lengkap kami.
+    </p>
+    <p class="not-found__links">
+      <a href={withBase('/')}>Kembali ke beranda</a>
+      <a href={withBase('/menu')}>Lihat menu</a>
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found__links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    align-items: flex-start;
+  }
+</style>
