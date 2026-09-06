@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hanafi-digital.github.io/pepes-emin/sitemap-index.xml
