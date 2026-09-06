@@ -1,0 +1,29 @@
+---
+// Minimal scaffold. Navigation links, mobile behavior, and aria-current
+// wiring are filled in when the header's content is finalized.
+import { withBase } from '../lib/url';
+import { restaurant } from '../data/restaurant';
+---
+
+<header>
+  <div class="container">
+    <a href={withBase('/')}>{restaurant.name}</a>
+  </div>
+</header>
+
+<style>
+  header {
+    background: var(--leaf);
+    color: var(--salt);
+  }
+
+  .container {
+    padding-block: var(--sp-3);
+  }
+
+  a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-decoration: none;
+  }
+</style>

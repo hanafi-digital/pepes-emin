@@ -1,0 +1,28 @@
+---
+// Minimal scaffold. Address, hours summary, contact links, and the
+// prototype notice are filled in when the footer's content is finalized.
+import { restaurant } from '../data/restaurant';
+---
+
+<footer>
+  <div class="container">
+    <p>{restaurant.name}</p>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background: var(--leaf);
+    color: var(--salt);
+  }
+
+  .container {
+    padding-block: var(--sp-5);
+    text-align: center;
+  }
+
+  p {
+    max-width: none;
+    font-size: var(--fs-100);
+  }
+</style>

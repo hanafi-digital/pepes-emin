@@ -1,15 +1,11 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { restaurant } from '../data/restaurant';
 ---
 
-<!doctype html>
-<html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RM Pepes Jambal H. Emin</title>
-  </head>
-  <body>
-    <h1>RM Pepes Jambal H. Emin</h1>
-    <p>Selamat datang di RM Pepes Jambal H. Emin Walahar, Karawang.</p>
-  </body>
-</html>
+<BaseLayout
+  title={restaurant.name}
+  description="RM Pepes Jambal H. Emin, Walahar, Karawang."
+>
+  <h1>{restaurant.name}</h1>
+</BaseLayout>
