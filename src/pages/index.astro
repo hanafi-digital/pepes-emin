@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
 import { restaurant } from '../data/restaurant';
 ---
 
@@ -7,5 +8,5 @@ import { restaurant } from '../data/restaurant';
   title={restaurant.name}
   description="RM Pepes Jambal H. Emin, Walahar, Karawang."
 >
-  <h1>{restaurant.name}</h1>
+  <Hero />
 </BaseLayout>
