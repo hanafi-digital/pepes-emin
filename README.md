@@ -22,7 +22,7 @@ Jika Anda ingin menjalankan atau memodifikasi kode ini di komputer lokal, ikuti 
 1. Pastikan [Node.js](https://nodejs.org/) sudah terinstal.
 2. *Clone* repositori ini:
    ```bash
-   git clone https://github.com/hanafifirman11/pepes-emin.git
+   git clone https://github.com/hanafi-digital/pepes-emin.git
    ```
 3. Masuk ke folder proyek:
    ```bash
@@ -47,4 +47,4 @@ Jika Anda ingin menjalankan atau memodifikasi kode ini di komputer lokal, ikuti 
 ## 🌐 Status Deployment
 
 *Prototype* ini dapat diakses secara langsung melalui:
-[https://hanafifirman11.github.io/pepes-emin](https://hanafifirman11.github.io/pepes-emin)
+[https://hanafi-digital.github.io/pepes-emin](https://hanafi-digital.github.io/pepes-emin)
