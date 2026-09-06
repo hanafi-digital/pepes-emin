@@ -1,6 +1,15 @@
 ---
+import { Image } from 'astro:assets';
 import type { MenuItem } from '../data/types';
 import { formatIdr } from '../lib/format';
+
+import pepesJambalImg from '../assets/hero-placeholder.jpg';
+import pepesAyamImg from '../assets/pepes-ayam.jpg';
+import sateMaranggiImg from '../assets/sate-maranggi.jpg';
+import ikanBakarImg from '../assets/ikan-bakar.jpg';
+import bakakakAyamImg from '../assets/bakakak-ayam.jpg';
+import sayurAsemImg from '../assets/sayur-asem.jpg';
+import minumanSegarImg from '../assets/minuman-segar.jpg';
 
 interface Props {
   item: MenuItem;
@@ -8,6 +17,23 @@ interface Props {
 }
 
 const { item, categoryName } = Astro.props;
+
+// Match items to actual high-resolution dish photography
+const dishImages: Record<string, ImageMetadata> = {
+  'Pepes Jambal': pepesJambalImg,
+  'Pepes Ayam': pepesAyamImg,
+  'Sate Maranggi': sateMaranggiImg,
+  'Ikan Bakar': ikanBakarImg,
+  'Bakakak (Ayam)': bakakakAyamImg,
+  'Sayur Asem': sayurAsemImg,
+  'Es Jeruk': minumanSegarImg,
+  'Es Kelapa': minumanSegarImg,
+  'Es Teh Manis': minumanSegarImg,
+  'Lalap': sayurAsemImg,
+  'Sambel': sayurAsemImg,
+};
+
+const photo = dishImages[item.name] || null;
 
 function getCategoryConfig(name: string, category?: string): { label: string; icon: string; badgeClass: string } {
   const lower = (category || name).toLowerCase();
@@ -56,27 +82,55 @@ function getCategoryConfig(name: string, category?: string): { label: string; ic
 const config = getCategoryConfig(item.name, categoryName);
 ---
 
-<div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-stone-200/80 bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-emerald-700/50 hover:shadow-xl">
+<div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-stone-200/80 bg-white shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-emerald-700/50 hover:shadow-xl">
   <div>
-    <!-- Top Row: Category Icon & Badges -->
-    <div class="flex items-center justify-between gap-2">
-      <span class={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-bold ${config.badgeClass}`}>
-        <span>{config.icon}</span>
-        <span>{config.label}</span>
-      </span>
+    {
+      photo ? (
+        <div class="relative aspect-[16/11] w-full overflow-hidden bg-stone-100">
+          <Image
+            src={photo}
+            alt={`Foto sajian ${item.name} RM Pepes Jambal H. Emin`}
+            width={600}
+            height={420}
+            loading="lazy"
+            class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
 
-      {
-        item.isFeatured && (
-          <span class="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 px-2.5 py-0.5 text-[11px] font-extrabold text-white shadow-xs">
-            ★ Favorit
+          <!-- Top Badge Overlay -->
+          <div class="absolute top-3 left-3 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-0.5 text-[11px] font-bold text-white backdrop-blur-xs">
+              <span>{config.icon}</span>
+              <span>{config.label}</span>
+            </span>
+          </div>
+
+          {item.isFeatured && (
+            <div class="absolute top-3 right-3">
+              <span class="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 px-2.5 py-0.5 text-[11px] font-black text-white shadow-md">
+                ★ Terfavorit
+              </span>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div class="p-6 pb-0 flex items-center justify-between gap-2">
+          <span class={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-bold ${config.badgeClass}`}>
+            <span>{config.icon}</span>
+            <span>{config.label}</span>
           </span>
-        )
-      }
-    </div>
+          {item.isFeatured && (
+            <span class="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 px-2.5 py-0.5 text-[11px] font-black text-white shadow-xs">
+              ★ Terfavorit
+            </span>
+          )}
+        </div>
+      )
+    }
 
-    <!-- Dish Name -->
-    <div class="mt-4">
-      <h3 class="text-lg font-bold text-stone-900 group-hover:text-emerald-900 transition-colors">
+    <!-- Content Details -->
+    <div class="p-5 sm:p-6">
+      <h3 class="text-base sm:text-lg font-extrabold text-stone-900 group-hover:text-emerald-900 transition-colors">
         {item.name}
       </h3>
       {item.description && (
@@ -84,21 +138,21 @@ const config = getCategoryConfig(item.name, categoryName);
           {item.description}
         </p>
       )}
-    </div>
-  </div>
 
-  <!-- Price & Status Footer -->
-  <div class="mt-6 flex items-baseline justify-between border-t border-stone-100 pt-4">
-    <div>
-      <span class="block text-[11px] font-medium text-stone-400 uppercase tracking-wider">Harga Resmi</span>
-      <span class="text-lg sm:text-xl font-black text-emerald-800 tabular-nums">
-        {item.isAvailable ? formatIdr(item.priceIdr) : 'Habis'}
-      </span>
-    </div>
+      <!-- Price & Status Footer -->
+      <div class="mt-4 flex items-baseline justify-between border-t border-stone-100 pt-3">
+        <div>
+          <span class="block text-[10px] font-bold text-stone-400 uppercase tracking-wider">Harga Resmi</span>
+          <span class="text-lg sm:text-xl font-black text-emerald-800 tabular-nums">
+            {item.isAvailable ? formatIdr(item.priceIdr) : 'Habis'}
+          </span>
+        </div>
 
-    <span class="inline-flex items-center gap-1 text-xs font-semibold text-stone-500 group-hover:text-emerald-800 transition-colors">
-      <span>Tersedia</span>
-      <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-    </span>
+        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-800">
+          <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+          <span>Tersedia</span>
+        </span>
+      </div>
+    </div>
   </div>
 </div>

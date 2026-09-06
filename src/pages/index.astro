@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import FeaturedMenu from '../components/FeaturedMenu.astro';
+import Gallery from '../components/Gallery.astro';
 import Reviews from '../components/Reviews.astro';
 import Location from '../components/Location.astro';
 import OpenStatusBadge from '../components/OpenStatusBadge.astro';
@@ -43,6 +44,7 @@ const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery
   </Hero>
   <About />
   <FeaturedMenu />
+  <Gallery />
   <Reviews />
   <Location>
     <LazyEmbed
