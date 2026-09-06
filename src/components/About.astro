@@ -2,91 +2,95 @@
 import { restaurant } from '../data/restaurant';
 ---
 
-<section id="tentang" class="py-12 sm:py-16 lg:py-20 bg-[#F4EEE3]/50 border-y border-stone-200/60">
+<section id="tentang" class="py-12 sm:py-16 lg:py-24 bg-white/70 border-y border-stone-200/70 backdrop-blur-xs">
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14 items-center">
-      <!-- Left: Story Text -->
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16 items-center">
+      <!-- Left: Story Narrative -->
       <div class="lg:col-span-6">
-        <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-800">
-          <span class="h-1 w-5 rounded-full bg-amber-600"></span>
-          <span>Tentang Kami</span>
+        <div class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-900">
+          <span class="h-1.5 w-1.5 rounded-full bg-emerald-600"></span>
+          <span>Cerita Warung &amp; Tradisi</span>
         </div>
 
-        <h2 class="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-stone-900 leading-tight">
-          Cerita Tradisi &amp; Cita Rasa Sunda di Walahar
+        <h2 class="mt-3 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-stone-900 leading-tight">
+          Dedikasi Menjaga Keaslian Resep Sunda di Walahar
         </h2>
 
-        <div class="mt-4 flex flex-col gap-3 text-stone-600 leading-relaxed text-sm sm:text-base">
+        <!-- Featured Quote Box -->
+        <div class="mt-5 rounded-2xl border-l-4 border-amber-500 bg-amber-50/70 p-4 text-stone-800 text-sm italic leading-relaxed">
+          &ldquo;Ikan jambal roti dipilih yang berdaging tebal, dibumbui rempah kuning segar khas Sunda, lalu dikukus berjam-jam dalam bungkus daun pisang alami.&rdquo;
+        </div>
+
+        <div class="mt-5 flex flex-col gap-3.5 text-stone-600 leading-relaxed text-sm sm:text-base">
           {restaurant.description.map((paragraph) => (
             <p>{paragraph}</p>
           ))}
         </div>
 
         <!-- Cash Only Alert Box -->
-        <div class="mt-6 flex items-start gap-3 rounded-2xl border border-amber-200/80 bg-amber-50/80 p-4 text-xs sm:text-sm text-amber-900">
-          <svg class="h-5 w-5 shrink-0 text-amber-700 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="12" y1="8" x2="12" y2="12"/>
-            <line x1="12" y1="16" x2="12.01" y2="16"/>
-          </svg>
+        <div class="mt-6 flex items-start gap-3 rounded-2xl border border-stone-200 bg-white p-4 shadow-2xs text-xs sm:text-sm">
+          <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-800 font-bold">
+            💵
+          </div>
           <div>
-            <span class="font-bold">Informasi Pembayaran:</span>
-            <p class="mt-0.5 text-amber-800/90">Saat ini transaksi di rumah makan melayani pembayaran tunai (cash).</p>
+            <span class="font-bold text-stone-900">Informasi Pembayaran Kasir:</span>
+            <p class="mt-0.5 text-stone-600">Saat ini transaksi di rumah makan melayani pembayaran tunai (cash) demi kelancaran antrean.</p>
           </div>
         </div>
       </div>
 
-      <!-- Right: Feature Cards Grid -->
+      <!-- Right: Modern Feature Cards -->
       <div class="lg:col-span-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="rounded-2xl border border-stone-200/80 bg-white p-5 shadow-xs transition-transform hover:-translate-y-0.5">
-            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-800 mb-3">
-              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
-                <path d="m9 12 2 2 4-4"/>
-              </svg>
+          <!-- Feature 1 -->
+          <div class="group relative overflow-hidden rounded-3xl border border-stone-200/80 bg-gradient-to-br from-white to-emerald-50/30 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-700/50 hover:shadow-md">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-800 text-white text-xl shadow-sm mb-4 transition-transform group-hover:scale-110">
+              🐟
             </div>
-            <h3 class="text-base font-bold text-stone-900">Ikan Jambal Roti</h3>
-            <p class="mt-1 text-xs text-stone-500 leading-relaxed">
-              Daging ikan tebal dengan tekstur empuk dan gurih pas, diolah secara higienis setiap hari.
+            <h3 class="text-base font-extrabold text-stone-900 group-hover:text-emerald-900 transition-colors">
+              Ikan Jambal Roti Pilihan
+            </h3>
+            <p class="mt-1.5 text-xs sm:text-sm text-stone-600 leading-relaxed">
+              Daging ikan tebal, gurih lembut, tidak amis, dan rasa asinnya sangat pas untuk santap siang.
             </p>
           </div>
 
-          <div class="rounded-2xl border border-stone-200/80 bg-white p-5 shadow-xs transition-transform hover:-translate-y-0.5">
-            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-100 text-amber-800 mb-3">
-              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
-                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
-              </svg>
+          <!-- Feature 2 -->
+          <div class="group relative overflow-hidden rounded-3xl border border-stone-200/80 bg-gradient-to-br from-white to-amber-50/30 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-amber-600/50 hover:shadow-md">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-600 text-white text-xl shadow-sm mb-4 transition-transform group-hover:scale-110">
+              🍃
             </div>
-            <h3 class="text-base font-bold text-stone-900">Bungkus Daun Alami</h3>
-            <p class="mt-1 text-xs text-stone-500 leading-relaxed">
-              Dikukus dan dibakar berbalut daun pisang segar untuk menghasilkan aroma harum yang khas.
+            <h3 class="text-base font-extrabold text-stone-900 group-hover:text-amber-900 transition-colors">
+              Bungkus Daun Alami
+            </h3>
+            <p class="mt-1.5 text-xs sm:text-sm text-stone-600 leading-relaxed">
+              Dikukus dan dibakar menggunakan daun pisang segar pilihan untuk memunculkan aroma sedap alami.
             </p>
           </div>
 
-          <div class="rounded-2xl border border-stone-200/80 bg-white p-5 shadow-xs transition-transform hover:-translate-y-0.5">
-            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-rose-100 text-rose-800 mb-3">
-              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 3c-1.5 0-3 .5-4 1.5-1.5 1.5-2 3.5-1.5 5.5.5 2 2 3.5 3.5 5 1 1 2 2 2 3 0-1 1-2 2-3 1.5-1.5 3-3 3.5-5 .5-2 0-4-1.5-5.5-1-1-2.5-1.5-4-1.5z"/>
-              </svg>
+          <!-- Feature 3 -->
+          <div class="group relative overflow-hidden rounded-3xl border border-stone-200/80 bg-gradient-to-br from-white to-rose-50/30 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-rose-600/50 hover:shadow-md">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-600 text-white text-xl shadow-sm mb-4 transition-transform group-hover:scale-110">
+              🌶️
             </div>
-            <h3 class="text-base font-bold text-stone-900">Rempah Khas Sunda</h3>
-            <p class="mt-1 text-xs text-stone-500 leading-relaxed">
-              Kombinasi cabai, bawang, serai, kunyit, dan daun kemangi segar yang meresap hingga ke tulang.
+            <h3 class="text-base font-extrabold text-stone-900 group-hover:text-rose-900 transition-colors">
+              Rempah Khas Sunda
+            </h3>
+            <p class="mt-1.5 text-xs sm:text-sm text-stone-600 leading-relaxed">
+              Racikan bumbu ulek tradisional cabai, serai, kunyit, daun salam, dan kemangi segar tanpa bahan pengawet.
             </p>
           </div>
 
-          <div class="rounded-2xl border border-stone-200/80 bg-white p-5 shadow-xs transition-transform hover:-translate-y-0.5">
-            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-blue-800 mb-3">
-              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
-                <circle cx="12" cy="10" r="3"/>
-              </svg>
+          <!-- Feature 4 -->
+          <div class="group relative overflow-hidden rounded-3xl border border-stone-200/80 bg-gradient-to-br from-white to-blue-50/30 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-600/50 hover:shadow-md">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-700 text-white text-xl shadow-sm mb-4 transition-transform group-hover:scale-110">
+              🌊
             </div>
-            <h3 class="text-base font-bold text-stone-900">Dekat Bendungan</h3>
-            <p class="mt-1 text-xs text-stone-500 leading-relaxed">
-              Mudah dijangkau di kawasan Walahar, menjadi tempat singgah favorit keluarga dan rombongan.
+            <h3 class="text-base font-extrabold text-stone-900 group-hover:text-blue-900 transition-colors">
+              Dekat Bendungan Walahar
+            </h3>
+            <p class="mt-1.5 text-xs sm:text-sm text-stone-600 leading-relaxed">
+              Akses jalan mudah dari gerbang tol Klari/Karawang, cocok untuk tempat singgah istirahat dan makan bersama.
             </p>
           </div>
         </div>

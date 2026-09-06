@@ -21,7 +21,7 @@ const breadcrumbJsonLd = {
 ---
 
 <BaseLayout
-  title={`Daftar Harga & Menu Lengkap — ${restaurant.name}`}
+  title={`Daftar Menu & Harga Lengkap — ${restaurant.name}`}
   description="Daftar menu dan harga lengkap pepes jambal, pepes ayam, ikan bakar, sate maranggi, dan aneka masakan Sunda di RM Pepes Jambal H. Emin, Walahar, Karawang."
   canonicalPath="/menu"
   hasStickyContact={Boolean(restaurant.googleMapsDirectionsUrl || restaurant.whatsapp)}
@@ -33,28 +33,28 @@ const breadcrumbJsonLd = {
     is:inline
   />
 
-  <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+  <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-14 lg:px-8">
     <!-- Header Section -->
-    <div class="border-b border-stone-200/80 pb-6">
-      <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-800">
-        <span class="h-1 w-5 rounded-full bg-amber-600"></span>
+    <div class="border-b border-stone-200/80 pb-8">
+      <div class="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-900">
+        <span class="h-1.5 w-1.5 rounded-full bg-amber-600"></span>
         <span>Katalog Kuliner Sunda</span>
       </div>
-      <h1 class="mt-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-stone-900">
+      <h1 class="mt-3 text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-stone-900">
         Daftar Menu &amp; Harga Lengkap
       </h1>
-      <p class="mt-2 text-sm sm:text-base text-stone-600 max-w-2xl">
-        Seluruh olahan disajikan dengan resep tradisional dan rempah pilihan. Harga tercantum adalah harga resmi rumah makan.
+      <p class="mt-2 text-sm sm:text-base text-stone-600 max-w-2xl leading-relaxed">
+        Seluruh olahan disajikan dengan resep bumbu khas Sunda dan bahan segar setiap hari. Harga tercantum adalah harga resmi rumah makan.
       </p>
 
       <!-- Category Filter Pills -->
       {
         categoriesWithItems.length > 0 && (
-          <nav aria-label="Kategori menu" class="mt-6 flex flex-wrap gap-2">
+          <nav aria-label="Kategori menu" class="mt-6 flex flex-wrap gap-2.5">
             {categoriesWithItems.map((category) => (
               <a
                 href={`#${category.name.toLowerCase().replace(/\s+/g, '-')}`}
-                class="rounded-full border border-stone-300/80 bg-white px-3.5 py-1.5 text-xs font-semibold text-stone-700 shadow-2xs transition-colors hover:border-emerald-800 hover:bg-emerald-50 hover:text-emerald-900 active:scale-95"
+                class="rounded-full border border-stone-200/90 bg-white px-4 py-1.5 text-xs font-bold text-stone-700 shadow-2xs transition-all hover:border-emerald-700 hover:bg-emerald-50 hover:text-emerald-900 active:scale-95"
               >
                 {category.name}
               </a>
@@ -65,17 +65,17 @@ const breadcrumbJsonLd = {
     </div>
 
     <!-- Category Sections -->
-    <div class="mt-8 flex flex-col gap-12">
+    <div class="mt-10 flex flex-col gap-14">
       {
         categoriesWithItems.map((category) => (
           <section id={category.name.toLowerCase().replace(/\s+/g, '-')} class="scroll-mt-24">
-            <div class="flex items-center gap-3 border-b border-stone-200/60 pb-3 mb-6">
-              <span class="h-2 w-2 rounded-full bg-emerald-700"></span>
-              <h2 class="text-xl sm:text-2xl font-bold text-stone-900">{category.name}</h2>
-              <span class="text-xs text-stone-400 font-medium">({category.items.length} pilihan)</span>
+            <div class="flex items-center gap-3 border-b border-stone-200/80 pb-3.5 mb-6">
+              <span class="h-2.5 w-2.5 rounded-full bg-emerald-700"></span>
+              <h2 class="text-xl sm:text-2xl font-black text-stone-900">{category.name}</h2>
+              <span class="text-xs text-stone-400 font-semibold">({category.items.length} pilihan)</span>
             </div>
 
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
+            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
               {category.items.map((item) => (
                 <MenuCard item={item} categoryName={category.name} />
               ))}
@@ -86,12 +86,12 @@ const breadcrumbJsonLd = {
     </div>
 
     <!-- Note & Action Bottom Bar -->
-    <div class="mt-12 rounded-3xl border border-stone-200/80 bg-white/80 p-6 sm:p-8 shadow-xs">
+    <div class="mt-14 rounded-3xl border border-stone-200/80 bg-white/90 p-6 sm:p-8 shadow-sm">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
         <div>
-          <span class="font-bold text-stone-800 text-sm sm:text-base">Catatan Kunjungan:</span>
+          <span class="font-black text-stone-900 text-sm sm:text-base">Catatan Kunjungan &amp; Pemesanan:</span>
           <p class="mt-1 text-xs sm:text-sm text-stone-500 max-w-xl leading-relaxed">
-            Harga dan ketersediaan menu dapat berubah sewaktu-waktu. Untuk reservasi rombongan atau memastikan ketersediaan pepes jambal jumbo, silakan hubungi kontak kami atau datang langsung ke lokasi.
+            Harga dan ketersediaan menu dapat berubah sewaktu-waktu. Untuk rombongan besar atau memastikan ketersediaan pepes jambal jumbo, silakan datang lebih awal atau hubungi kami sebelum perjalanan.
           </p>
         </div>
 

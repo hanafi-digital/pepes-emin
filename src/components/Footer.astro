@@ -31,83 +31,88 @@ const hoursSummary = hasConfirmedHours
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-[#112D20] text-stone-300 border-t border-emerald-950">
-  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+<footer class="bg-gradient-to-b from-[#0f2e21] to-[#071710] text-stone-300 border-t border-emerald-950/80">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
     <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
       <!-- Col 1: Brand Info -->
-      <div class="flex flex-col gap-3">
-        <div class="flex items-center gap-2.5">
-          <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-800 text-white">
+      <div class="flex flex-col gap-3.5">
+        <div class="flex items-center gap-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-700 to-emerald-900 text-white shadow-md">
             <svg class="h-5 w-5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
               <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
             </svg>
           </div>
-          <span class="text-base font-bold tracking-tight text-white">
-            {restaurant.name}
-          </span>
+          <div>
+            <span class="block text-base font-extrabold tracking-tight text-white">
+              {restaurant.name}
+            </span>
+            <span class="block text-[11px] text-emerald-400 font-medium">
+              Kuliner Khas Walahar, Karawang
+            </span>
+          </div>
         </div>
         <p class="text-xs sm:text-sm text-stone-400 leading-relaxed">
-          Rumah makan Sunda legendaris di Walahar, Karawang. Menyajikan pepes jambal roti autentik, ayam bakar, dan aneka lauk tradisional.
+          Rumah makan Sunda legendaris di Walahar. Menyajikan pepes jambal roti autentik dengan bumbu rempah pilihan, dibungkus daun pisang alami dan dikukus perlahan.
         </p>
       </div>
 
       <!-- Col 2: Quick Links -->
       <div>
-        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-3">
+        <h4 class="text-xs font-black uppercase tracking-wider text-amber-400 mb-3.5">
           Navigasi Cepat
         </h4>
-        <ul class="flex flex-col gap-2 text-xs sm:text-sm">
+        <ul class="flex flex-col gap-2.5 text-xs sm:text-sm">
           <li>
-            <a href={withBase('/')} class="hover:text-white transition-colors">Beranda</a>
+            <a href={withBase('/')} class="hover:text-amber-300 transition-colors">Beranda</a>
           </li>
           <li>
-            <a href={withBase('/#tentang')} class="hover:text-white transition-colors">Tentang Kami</a>
+            <a href={withBase('/#tentang')} class="hover:text-amber-300 transition-colors">Tentang Kami</a>
           </li>
           <li>
-            <a href={withBase('/#menu')} class="hover:text-white transition-colors">Menu Favorit</a>
+            <a href={withBase('/#menu')} class="hover:text-amber-300 transition-colors">Menu Terfavorit</a>
           </li>
           <li>
-            <a href={withBase('/menu')} class="hover:text-white transition-colors">Daftar Menu Lengkap</a>
+            <a href={withBase('/menu')} class="hover:text-amber-300 transition-colors">Daftar Menu &amp; Harga</a>
           </li>
           <li>
-            <a href={withBase('/#ulasan')} class="hover:text-white transition-colors">Kata Pelanggan</a>
+            <a href={withBase('/#ulasan')} class="hover:text-amber-300 transition-colors">Kata Pelanggan</a>
           </li>
           <li>
-            <a href={withBase('/#lokasi')} class="hover:text-white transition-colors">Lokasi &amp; Jam</a>
+            <a href={withBase('/#lokasi')} class="hover:text-amber-300 transition-colors">Lokasi &amp; Jam Operasional</a>
           </li>
         </ul>
       </div>
 
       <!-- Col 3: Hours Summary -->
       <div>
-        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-3">
+        <h4 class="text-xs font-black uppercase tracking-wider text-amber-400 mb-3.5">
           Jam Operasional
         </h4>
         <p class="text-xs sm:text-sm text-stone-300 leading-relaxed mb-2">
           {hoursSummary}
         </p>
-        <p class="text-xs text-stone-400">
+        <span class="inline-block rounded-lg bg-emerald-900/60 border border-emerald-800/80 px-2.5 py-1 text-[11px] font-bold text-amber-300">
           * Hari Jumat Tutup
-        </p>
+        </span>
       </div>
 
       <!-- Col 4: Location & Action -->
       <div>
-        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-3">
+        <h4 class="text-xs font-black uppercase tracking-wider text-amber-400 mb-3.5">
           Alamat Rumah Makan
         </h4>
         <address class="not-italic flex flex-col text-xs sm:text-sm text-stone-300 leading-snug mb-4">
           {addressLines.map((line) => <span>{line}</span>)}
         </address>
 
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-2.5">
           {restaurant.googleMapsDirectionsUrl && (
             <a
               href={restaurant.googleMapsDirectionsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-300 hover:text-white underline underline-offset-4"
+              class="inline-flex items-center gap-2 text-xs font-bold text-amber-400 hover:text-amber-300 transition-colors underline underline-offset-4"
             >
               <span>Petunjuk Rute di Google Maps</span>
               <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -136,12 +141,12 @@ const year = new Date().getFullYear();
     </div>
 
     <!-- Bottom Copyright -->
-    <div class="mt-12 border-t border-emerald-900/60 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-400">
+    <div class="mt-14 border-t border-emerald-950/80 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-400">
       <p>
-        &copy; {year} {restaurant.name} — Walahar, Karawang.
+        &copy; {year} <span class="text-stone-300 font-semibold">{restaurant.name}</span> — Walahar, Klari, Karawang.
       </p>
       <p class="text-stone-500">
-        Website Prototype Resmi. Dibuat untuk kenyamanan pengunjung.
+        Website Prototype Resmi. Dibuat cepat &amp; nyaman untuk pelanggan.
       </p>
     </div>
   </div>
