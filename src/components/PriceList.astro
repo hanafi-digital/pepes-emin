@@ -5,9 +5,11 @@ import { formatIdr } from '../lib/format';
 interface Props {
   categories: MenuCategory[];
   featuredOnly?: boolean;
+  headingLevel?: 'h2' | 'h3';
 }
 
-const { categories, featuredOnly = false } = Astro.props;
+const { categories, featuredOnly = false, headingLevel = 'h3' } = Astro.props;
+const Heading = headingLevel;
 
 const visibleCategories = categories
   .map((category) => ({
@@ -23,7 +25,7 @@ const visibleCategories = categories
   {
     visibleCategories.map((category) => (
       <div class="price-list__category">
-        <h3>{category.name}</h3>
+        <Heading id={category.name.toLowerCase().replace(/\s+/g, '-')}>{category.name}</Heading>
         <dl>
           {category.items.map((item) => (
             <div class="price-row">
