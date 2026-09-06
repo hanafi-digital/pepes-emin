@@ -48,3 +48,10 @@ Jika Anda ingin menjalankan atau memodifikasi kode ini di komputer lokal, ikuti 
 
 *Prototype* ini dapat diakses secara langsung melalui:
 [https://hanafi-digital.github.io/pepes-emin](https://hanafi-digital.github.io/pepes-emin)
+
+## ✅ Continuous Integration
+
+Setiap *pull request* dan *push* ke `main` menjalankan pemeriksaan otomatis lewat GitHub Actions:
+audit dependensi, *type check*, build, validasi data terstruktur, dan Lighthouse CI (Performance,
+Accessibility, Best Practices, SEO — target ≥ 95 pada mobile). *Branch* `main` sebaiknya diberi
+proteksi agar status CI yang hijau menjadi syarat sebelum *merge* diizinkan.
